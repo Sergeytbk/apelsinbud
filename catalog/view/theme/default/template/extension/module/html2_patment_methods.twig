@@ -1,0 +1,15 @@
+<div class="title-box">
+    <h2 class="title">{{ title }}</h2>
+</div>
+<div class="text">
+    <div class="row">
+        {% for method in payment_methods_migx %}
+        <div class="col-12 col-md-6">
+            <div class="text-block">
+                <div class="text-title-sm">{{ method.title }}</div>
+                {{ method.description | html_entity_decode }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

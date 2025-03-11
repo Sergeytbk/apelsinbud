@@ -1,0 +1,52 @@
+{{ header }}
+<section class="section section_bottom">
+  <div class="section-border section-border-bottom">
+    <div id="account-account" class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          {% for breadcrumb in breadcrumbs %}
+            {% if loop.last %}
+              <li class="breadcrumb-item active" aria-current="page">{{ breadcrumb.text }}</li>
+            {% else %}
+              <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endif %}
+          {% endfor %}
+        </ol>
+      </nav>
+      {% if success %}
+      <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}</div>
+      {% endif %}
+      <div class="row">{{ column_left }}
+        {% if column_left and column_right %}
+        {% set class = 'col-sm-6' %}
+        {% elseif column_left or column_right %}
+        {% set class = 'col-sm-9' %}
+        {% else %}
+        {% set class = 'col-sm-12' %}
+        {% endif %}
+        <div id="content" class="{{ class }}">{{ content_top }}
+          <h2 class="mb-4">{{ text_my_account }}</h2>
+          <ul class="list-unstyled mb-4">
+            <li><a href="{{ edit }}">{{ text_edit }}</a></li>
+            <li><a href="{{ password }}">{{ text_password }}</a></li>
+            <li><a href="{{ address }}">{{ text_address }}</a></li>
+            <li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
+          </ul>
+          {% if credit_cards %}
+          <h2 class="mb-4">{{ text_credit_card }}</h2>
+          <ul class="list-unstyled mb-4">
+            {% for credit_card in credit_cards %}
+            <li><a href="{{ credit_card.href }}">{{ credit_card.name }}</a></li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+          <h2 class="mb-4">{{ text_my_orders }}</h2>
+          <ul class="list-unstyled">
+            <li><a href="{{ order }}">{{ text_order }}</a></li>
+          </ul>
+          {{ content_bottom }}</div>
+        {{ column_right }}</div>
+    </div>
+  </div>
+</section>
+{{ footer }}

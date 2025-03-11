@@ -1,0 +1,34 @@
+.htaccess
+/config.php
+admin/config.php
+storage/*
+
+download/
+image/data/
+image/cache/
+image/jetcache/
+image/catalog/
+system/cache/
+system/logs/
+
+system/storage/
+
+# Лог-файли
+*.log
+*.sql
+*.sqlite
+*.bak
+
+# Файли IDE та операційної системи
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.swp
+
+# vQmod log files
+vqmod/logs/*
+# vQmod cache files
+vqmod/vqcache/*
+vqmod/checked.cache
+vqmod/mods.cache

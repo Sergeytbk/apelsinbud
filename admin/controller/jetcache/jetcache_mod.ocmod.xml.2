@@ -1,0 +1,14 @@
+<file path="admin/controller/extension/modification.php">
+	<operation error="skip">
+        <search regex="true" position="replace"><![CDATA[~(.*?redirect.*?extension\/modification.*?\;)~]]></search>
+        <add position="replace"><![CDATA[
+// For Jet Cache refresh modifications from module
+			if (!$this->registry->get('jc_mod')) {
+			$1
+			} else {
+				return;
+			}
+		]]></add>
+	</operation>
+	
+</file>

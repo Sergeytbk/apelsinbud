@@ -1,0 +1,122 @@
+</main>
+</div>
+
+<div id="q-dataL"></div>
+<div id="dataL"></div>
+<!-- BEGIN FOOTER -->
+<footer  class="footer">
+    <div class="container container-fluid d-flex justify-content-between flex-wrap align-items-start">
+        <div class="footer-col footer__left">
+            <a href="{{ home }}" class="footer-logo">
+                <img src="{{ logo }}" alt="{{ name }}">
+            </a>
+            <div class="footer-slogan">{{ config_footer_slogan }}</div>
+            {{ language }}
+        </div>
+
+        {% if categories %}
+        <div class="footer-col footer-nav">
+            <div class="footer-title">{{ text_category_left_module }}</div>
+            <ul class="f-nav d-flex flex-wrap">
+                {% for category in categories %}
+                    <li class="f-nav-item w-50">
+                        <a href="{{ category.href }}" class="f-nav-item__link">{{ category.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <div class="footer-col footer-nav">
+            <div class="footer-title">{{ text_information }}</div>
+            <ul class="f-nav">
+                <li class="f-nav-item">
+                    <a href="{{ contact }}" class="f-nav-item__link">{{ text_contact }}</a>
+                </li>
+                <li class="f-nav-item">
+                    <a href="{{ about_us }}" class="f-nav-item__link">{{ text_about_us }}</a>
+                </li>
+                <li class="f-nav-item">
+                    <a href="{{ delivery_and_payment }}" class="f-nav-item__link">{{ text_delivery_and_payment }}</a>
+                </li>
+                <li class="f-nav-item">
+                    <a href="{{ vozvrata_tovara }}" class="f-nav-item__link">{{ text_vozvrata_tovara }}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="footer-col footer-contacts">
+            <div class="footer-title">{{ text_contact }}</div>
+            <ul class="footer-info">
+                <li class="footer-info__item">
+                    <span class="icon-call"></span>
+                    <a href="tel:{{ config_kyivstar |replace({'-':"",'+':"",'(':"",')':"",' ':"","+38":""}) }}">{{ config_kyivstar }}</a><br>
+                    <a href="tel:{{ config_life |replace({'-':"",'+':"",'(':"",')':"",' ':"","+38":""}) }}">{{ config_life }}</a><br>
+                    <a href="tel:{{ config_vodafone |replace({'-':"",'+':"",'(':"",')':"",' ':"","+38":""}) }}">{{ config_vodafone }}</a>
+                </li>
+                <li class="footer-info__item"><span class="icon-mail"></span><a href="mailto:{{ config_email }}">{{ config_email }}</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom d-flex justify-content-between">
+        <div class="container container-fluid">{{ powered }}</div>
+    </div>
+
+
+</footer>
+<!-- FOOTER EOF   -->
+
+<button type="button" class="btn btn-callback" data-toggle="modal" data-target="#callbackModal">
+    <span>{{ text_callback_btn }}</span>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="callbackModal" tabindex="-1" role="dialog" aria-labelledby="callbackModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="row">
+                    <div class="col-12 mb-4">
+                        <div class="title">
+                            {{ text_callback_form_title }}
+                        </div>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <input type="text" class="form-control" name="name" placeholder="{{ entry_name }}">
+                    </div>
+                    <div class="col-12 mb-3">
+                        <input type="text" class="form-control" name="phone" placeholder="{{ entry_phone }}">
+                    </div>
+                    <div class="col-12 mb-3">
+                        <textarea class="form-control" name="message" placeholder="{{ entry_message }}"></textarea>
+                    </div>
+                    <div class="col-12 text-center">
+                        <button class="btn btn_light" id="sendContactForm">{{ text_send_form }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if agant_q %}
+{% else %}
+    {% for script in scripts %}
+        <script src="{{ script }}" type="text/javascript"></script>
+    {% endfor %}
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="catalog/view/theme/qweb/js/slick.min.js?ver1.0"></script>
+    <script src="catalog/view/theme/qweb/js/jquery.fancybox.min.js?ver1.0"></script>
+    <script src="catalog/view/theme/qweb/js/jquery.mCustomScrollbar.js?ver1.0"></script>
+    <script src="catalog/view/theme/qweb/js/custom.js"></script>
+    <script src="catalog/view/javascript/jquery/maskinput.js"></script>
+
+{% endif %}
+
+<input type="hidden" name="qweb" value="{{ qweb }}">
+</body></html>

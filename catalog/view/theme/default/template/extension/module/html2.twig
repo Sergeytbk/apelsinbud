@@ -1,0 +1,48 @@
+{% for key,val in data %}
+    {% if val is iterable %}
+        {{ key }} - iterable <br/>
+        {% for key1,val1 in val %}
+            {% if val1 is iterable %}
+                {{ key1 }} - iterable <br/>
+                {% for key2,val2 in val1 %}
+                    {% if val2 is iterable %}
+                    {% else %}
+                        <table class="table table-striped table-bordered">
+                            <tr>
+                                <td>Ключ</td>
+                                <td>Значение</td>
+                            </tr>
+                            <tr>
+                                <td>{{ key2 }}</td>
+                                <td>{{ val2 }}</td>
+                            </tr>
+                        </table>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <table class="table table-striped table-bordered">
+                    <tr>
+                        <td>Ключ</td>
+                        <td>Значение</td>
+                    </tr>
+                    <tr>123
+                        <td>{{ key1 }}</td>
+                        <td>{{ val1 }}</td>
+                    </tr>
+                </table>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <table class="table table-striped table-bordered">
+            <tr>
+                <td>Ключ</td>
+                <td>Значение</td>
+            </tr>
+            <tr>
+                <td>{{ key }}</td>
+                <td>{{ val }}</td>
+            </tr>
+        </table>
+    {% endif %}
+{% endfor %}
+

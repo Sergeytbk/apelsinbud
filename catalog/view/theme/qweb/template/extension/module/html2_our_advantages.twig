@@ -1,0 +1,15 @@
+<div class="advantages">
+    <div class="row align-items-lg-center justify-content-center">
+        {% for advantage in our_advantages_migx %}
+        <div class="col-12 col-md-4 col-lg-4">
+            <div class="advantages-item d-flex align-items-center">
+                <div class="advantages-item__icon">
+                    <span class="{{ advantage.icon }}"></span>
+                </div>
+                <div class="advantages-item__text">{{ advantage.description | html_entity_decode }}</div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>

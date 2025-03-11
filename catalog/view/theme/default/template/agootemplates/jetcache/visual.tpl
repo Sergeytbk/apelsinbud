@@ -1,0 +1,265 @@
+<div id="jetcache-informer" class="sc-jetcache-bottom-heading">
+
+	<div class="sc-flex-container">
+		<div class="sc-flex-block sc-jetcache-heading">
+
+			<div class="sc-flex-block">
+				<div class="sc-flex-container">
+					<div class="sc-flex-container-left">
+						
+						<div style="margin-top:6px;">
+							<svg
+								version="1.1"
+								width="24"
+								height="24"
+								id="jetcacheicon"
+								xmlns="http://www.w3.org/2000/svg"
+								xmlns:svg="http://www.w3.org/2000/svg">
+								<defs id="defs2634" />
+								<g
+									id="g4616"
+									transform="matrix(0.32920411,0,0,0.32920366,-4.7727351,-4.410736)"
+									style="stroke-width:0.999017;stroke-dasharray:none">
+									<path
+									d="m 52.8037,59.7138 c 0.447,0.6417 0.0321,-0.2043 0.6628,1.1883 0.4141,0.9138 0.2438,0.5255 0.5225,1.3285 1.7767,5.1195 1.9054,8.6655 1.9054,14.1287 H 49.095 c 1.7331,-3.6024 3.593,-11.4687 3.7087,-16.6455 z m -7.4175,16.029 c -1.9581,-0.1625 -4.7348,-1.1572 -6.1814,-1.8495 2.9884,-4.4508 3.0138,-2.6608 8.6509,-12.3331 l 0.458,-0.7762 c 0.709,-1.1043 0.2261,-0.4331 0.7813,-1.0702 0,6.3917 -1.4828,11.8334 -3.7088,16.029 z m 10.5082,-17.2619 0.5151,-0.7193 c 0.4733,0.2018 8.7569,10.4189 8.7569,13.6658 0,2.3125 -3.8212,2.8653 -5.5632,3.6989 0,-3.902 -1.7828,-15.775 -3.7088,-16.6454 z m -19.7801,13.563 c -2.8543,-1.9064 -4.3299,-2.6343 -4.945,-4.9322 2.7601,-0.6413 5.4355,-2.5156 7.6706,-4.0629 l 6.5463,-5.1845 c -0.5688,2.4351 -2.5882,5.6502 -3.9808,7.7431 -1.7955,2.6983 -3.8224,4.2487 -5.2911,6.4365 z M 58.985,55.3983 c 6.0069,1.3958 11.4723,7.4144 14.2171,9.2474 -1.9115,2.8468 -2.6413,4.3186 -4.9452,4.9322 C 66.918,63.8461 60.9052,58.2582 58.985,55.3983 Z m -29.6702,8.6311 c -2.3186,0 -2.8728,-3.8111 -3.7086,-5.5485 3.6815,0 14.0645,-1.4236 16.6893,-3.6991 l 0.7212,0.5138 c -0.2024,0.472 -10.4465,8.7338 -13.7019,8.7338 z M 60.8394,51.6992 c 6.4086,0 11.8647,1.479 16.0713,3.6991 -0.1629,1.9529 -1.1603,4.7223 -1.8543,6.1651 -1.3748,-0.9184 -1.711,-1.5078 -2.9987,-2.5579 -4.7253,-3.8539 -6.1461,-3.9722 -10.1453,-6.527 -1.1072,-0.7071 -0.4342,-0.2255 -1.073,-0.7793 z m -32.7607,3.0826 h -3.7089 v -6.7815 c 3.612,1.7286 11.4991,3.5836 16.6895,3.6989 -2.6831,1.8595 -9.8095,3.0826 -12.9806,3.0826 z m 16.6893,-4.932 c 0,-7.9801 12.3627,-7.9801 12.3627,0 0,7.9801 -12.3627,7.9801 -12.3627,0 z m 29.052,-4.932 h 3.7089 v 6.7814 C 73.9169,49.9707 66.0298,48.1157 60.8394,48.0003 63.5225,46.1409 70.6489,44.9178 73.82,44.9178 Z M 58.882,44.404 c 0.0617,-0.144 5.6885,-4.6239 6.2782,-5.0407 10.1872,-7.1973 9.2482,-2.061 11.1323,1.8554 -3.5821,0 -5.7664,0.2943 -8.911,0.9764 l -5.8036,1.6099 c -1.3588,0.5038 -0.9223,0.2004 -1.9747,1.1128 z M 26.8423,38.1362 c 3.1885,2.1296 2.8666,3.0694 10.3877,7.5182 0.7487,0.4428 1.3064,0.7207 1.978,1.1099 l 1.8513,1.236 c -6.4086,0 -11.8647,-1.4789 -16.0713,-3.699 0.1629,-1.9529 1.1603,-4.7223 1.8543,-6.1651 z m 9.89,-9.864 c 0,-2.3125 3.8212,-2.8653 5.5632,-3.6989 0,3.5728 0.2951,5.7513 0.979,8.8876 0.4445,2.0387 1.3786,6.2074 2.7298,7.7578 L 45.4892,41.938 C 45.0159,41.7362 36.7323,31.519 36.7323,28.2722 Z m -3.0905,1.8497 c 1.3389,5.7316 7.3517,11.3195 9.2719,14.1794 -6.0068,-1.3958 -11.4723,-7.4144 -14.217,-9.2475 1.9114,-2.8467 2.6412,-4.3185 4.9451,-4.9319 z m 22.8707,11.7134 c 0.5688,-2.4351 2.5882,-5.6503 3.9808,-7.7431 1.7955,-2.6983 3.8224,-4.2487 5.2911,-6.4365 2.8543,1.9064 4.33,2.6343 4.9451,4.9322 -5.7469,1.3353 -11.3495,7.3322 -14.217,9.2474 z m -3.7088,-1.8495 c 0,-6.3917 1.4829,-11.8334 3.7088,-16.029 1.9581,0.1625 4.7348,1.1572 6.1814,1.8494 -3.2176,4.7922 -2.9253,2.9615 -8.8741,12.7271 z m -3.7087,0 C 46.3366,36.0265 46.0043,28.1517 46.0043,23.3403 h 6.7994 c -1.7331,3.6024 -3.593,11.4687 -3.7087,16.6455 z m -28.434,9.864 c 0,16.4722 13.7726,30.2086 30.2884,30.2086 16.5157,0 30.2883,-13.7364 30.2883,-30.2086 0,-16.4722 -13.7726,-30.2086 -30.2883,-30.2086 -16.5158,0 -30.2884,13.7364 -30.2884,30.2086 z"
+									style="fill:#FFF;fill-rule:evenodd;stroke-width:0.999017;stroke-dasharray:none"
+									id="path2626" />
+									<path
+									d="m 50.9494,86.3014 c -20.1316,0 -36.4516,-16.32 -36.4516,-36.4516 0,-20.1316 16.32,-36.4516 36.4516,-36.4516 20.1315,0 36.4515,16.32 36.4515,36.4516 0,20.1316 -16.32,36.4516 -36.4515,36.4516 z m 0,-3.2266 c -18.3497,0 -33.225,-14.8754 -33.225,-33.225 0,-18.3496 14.8753,-33.225 33.225,-33.225 18.3496,0 33.2249,14.8754 33.2249,33.225 0,18.3496 -14.8753,33.225 -33.2249,33.225 z"
+									style="fill:#FFF;fill-rule:evenodd;stroke-width:0.999017;stroke-dasharray:none"
+									id="path2628" />
+								</g>
+							</svg>
+						</div>
+
+				    </div>
+					<div>
+						<div>
+							&nbsp;
+							<?php echo $entry_jetcache; ?>
+						</div>
+				    </div>
+				</div>
+	   		</div>
+
+		</div>
+        <?php if ($cache_remove_status) { ?>
+		<div class="sc-flex-block">
+		    <a href="#" id="httpsfix_cache_remove" onclick="
+				$.ajax({
+					url: '<?php echo $jetcache_url_cache_remove; ?>',
+					type: 'POST',
+					data: 'filename=<?php echo $filename; ?>',
+					dataType: 'html',
+					beforeSend: function() {
+		               $('.div_cache_remove').show().html('<?php echo $text_jetcache_loading; ?>');
+					},
+					success: function(content) {
+						if (content) {
+							$('.div_cache_remove').show().html('<span style=\'color:#fff\'>'+content+'<\/span>');
+							setTimeout('jetcache_div_hide()', 2000);
+						}
+					},
+					error: function(content) {
+						$('.div_cache_remove').show().html('<span style=\'color:red\'><?php echo $text_jetcache_cache_remove_fail; ?><\/span>');
+					}
+				}); return false;" class="jetcache-button-buy" style=""><?php echo $text_jetcache_url_cache_remove; ?></a>
+				<div class="div_cache_remove"></div>
+		</div>
+        <?php } ?>
+
+		<div class="sc-flex-block" id="jet_queries">
+		<?php if ($queries != $queries_cache && $round_queries_queries_cache > 0) { ?>
+			<?php echo $entry_jetcache_db; ?>
+			<?php echo ' ('; ?>
+			<?php echo $text_jetcache_queries; ?>
+			<?php echo ') <br>Jet:&nbsp;&nbsp;x'; ?>
+			<?php echo $round_queries_queries_cache; ?>
+			<?php } else { ?>
+			 &nbsp;<br>&nbsp;
+			<?php } ?>
+		</div>
+        <?php if ($queries > 0 && $queries_cache > 0) { ?>
+  		<div class="sc-flex-block">
+			<div class="sc-flex-container">
+				<div class="sc-flex-container-left">
+					<div>
+					 <?php echo $entry_jetcache_queries; ?>&nbsp;
+					</div>
+					<?php if ($queries != $queries_cache) { ?>
+					<div>
+					   <?php echo $entry_jetcache_queries_cache; ?>&nbsp;
+					</div>
+					<?php } ?>
+			    </div>
+				<div>
+					<div>
+					  <?php echo $round_queries; ?>
+					</div>
+					<?php if ($queries != $queries_cache) { ?>
+					<div>
+					  <?php echo $round_queries_cache; ?>
+					</div>
+					<?php } ?>
+			    </div>
+			</div>
+   		</div>
+   		<?php } ?>
+<!--
+<?php if ($queries_count_cache != '') { ?>
+  		<div class="sc-flex-block">
+			<div class="sc-flex-container">
+				<div class="sc-flex-container-left">
+					<div>
+					 <?php echo $entry_queries_count_cache; ?>&nbsp;
+					</div>
+			    </div>
+				<div>
+					<div>
+					  <?php echo $round_queries_count_cache; ?>
+					</div>
+			    </div>
+			</div>
+   		</div>
+<?php } ?>
+-->
+
+<?php if ($count_cont_cached > 0) { ?>
+  		<div class="sc-flex-block">
+			<div class="sc-flex-container">
+				<div class="sc-flex-container-left">
+					<div>
+					 <?php echo $entry_count_cont_cached; ?>&nbsp;
+					</div>
+			    </div>
+				<div>
+					<div>
+					  <?php echo $count_cont_cached; ?>
+					</div>
+			    </div>
+			</div>
+   		</div>
+<?php } ?>
+
+
+<?php if ($count_model_cached != 0) { ?>
+  		<div class="sc-flex-block">
+			<div class="sc-flex-container">
+				<div class="sc-flex-container-left">
+					<div>
+					 <?php echo $entry_count_model_cached; ?>&nbsp;
+					</div>
+			    </div>
+				<div>
+					<div>
+					  <?php echo $count_model_cached; ?>
+					</div>
+			    </div>
+			</div>
+   		</div>
+<?php } ?>
+
+<?php if ($count_query_cached > 0 && $queries > 0 && $queries_cache > 0) { ?>
+  		<div class="sc-flex-block">
+			<div class="sc-flex-container">
+				<div class="sc-flex-container-left">
+					<div>
+					 <?php echo $entry_count_query_cached; ?>&nbsp;
+					</div>
+			    </div>
+				<div>
+					<div>
+					  <?php echo $count_query_cached; ?>
+					</div>
+			    </div>
+			</div>
+   		</div>
+<?php } ?>
+
+
+<?php if ($queries_time_cache != '' && $jetcache_opencart_core != '') { ?>
+		<div class="sc-flex-block">
+			<div class="sc-flex-container">
+				<div class="sc-flex-container-left">
+					<div>
+					 <?php echo $entry_queries_time_cache; ?>&nbsp;
+					</div>
+			    </div>
+				<div>
+					<div>
+					  &nbsp;<?php echo $round_queries_time_cache; ?> <?php echo $entry_jetcache_sec; ?>
+					</div>
+			    </div>
+			</div>
+   		</div>
+<?php } ?>
+
+<?php if ($jetcache_opencart_core != '') { ?>
+	  <div class="sc-flex-block">
+			<div class="sc-flex-container">
+				<div class="sc-flex-container-left">
+					<div>
+					 <?php echo $entry_jetcache_opencart_core; ?>&nbsp;
+					</div>
+			    </div>
+				<div>
+					<div>
+					  <?php echo $round_jetcache_opencart_core; ?> <?php echo $entry_jetcache_sec; ?>
+					</div>
+			    </div>
+			</div>
+	   </div>
+<?php } ?>
+
+		<div class="sc-flex-block">
+			<?php if ($load != $cache && $rate > 1) { ?>
+				<?php echo $entry_jetcache_pages.'<br>Jet:&nbsp;&nbsp;x'. $rate;  ?>
+			<?php } else { ?>
+			 &nbsp;<br>&nbsp;
+			<?php } ?>
+  		</div>
+
+		<div class="sc-flex-block">
+			<div class="sc-flex-container">
+				<div class="sc-flex-container-left">
+					<div>
+					 <?php echo $entry_jetcache_withoutcache; ?>&nbsp;
+					</div>
+					<?php if ($load != $cache && $load != $cache_all) { ?>
+					<div>
+					   <?php echo $entry_jetcache_cache; ?>&nbsp;
+					</div>
+					<?php } ?>
+			    </div>
+				<div>
+					<div>
+					  <?php echo $round_load; ?> <?php echo $entry_jetcache_sec; ?>
+					</div>
+					<?php if ($load != $cache && $load != $cache_all) { ?>
+					<div id="round_cache">
+					  <?php echo $round_cache; ?> <?php echo $entry_jetcache_sec; ?>
+					</div>
+					<div id="round_cache_all">
+					  <?php echo $round_cache_all; ?> <?php echo $entry_jetcache_sec; ?>
+					</div>
+                    <script>
+                    $('#round_cache, #round_cache_all').click(function(){
+                    	$('#round_cache').toggle();
+                    	$('#round_cache_all').toggle();
+                    });
+                    </script>
+
+					<?php } ?>
+			    </div>
+			</div>
+  		</div>
+
+	</div>
+
+</div>
+
+<script>
+function jetcache_div_hide() {
+	$('.div_cache_remove').hide();
+}
+</script>

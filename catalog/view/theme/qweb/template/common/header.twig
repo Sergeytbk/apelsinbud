@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html dir="{{ direction }}" lang="{{ lang }}">
+<!--<![endif]-->
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{ title }}</title>
+    <base href="{{ base }}" />
+    {% if description %}
+        <meta name="description" content="{{ description }}" />
+    {% endif %}
+    {% if keywords %}
+        <meta name="keywords" content="{{ keywords }}" />
+    {% endif %}
+    <link rel="preload" href="catalog/view/theme/qweb/fonts/icomoon.ttf?p0kfys"  as="font" type="font/ttf" crossorigin>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link href="catalog/view/theme/qweb/css/style.css" rel="stylesheet">
+ 
+
+   
+    {% if agant_q %}
+    {% else %}
+        <script src="catalog/view/theme/qweb/js/jquery-3.4.1.min.js?ver1.0"></script>
+        <script src="catalog/view/theme/qweb/js/jquery-migrate-1.4.1.min.js?ver1.0"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scrollbar/8.8.1/smooth-scrollbar.min.js" integrity="sha512-DmxN+h4rvEbHxmkzhxEA1krRvgdzSFhjkcTe2HCZpd5ZnxP9+OWGHB8iMUQhvidmrivCTe3g0hyeMpfTLIwf7Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+        {% for style in styles %}
+            <link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}" />
+        {% endfor %}
+        {% for script in scripts %}
+            <script src="{{ script }}" type="text/javascript"></script>
+        {% endfor %}
+        <script src="catalog/view/javascript/common.js" type="text/javascript"></script>
+        {% for link in links %}
+            <link href="{{ link.href }}" rel="{{ link.rel }}" />
+        {% endfor %}
+        {% for analytic in analytics %}
+            {{ analytic }}
+        {% endfor %}
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-NJ89FCBK');</script>
+        <!-- End Google Tag Manager -->
+
+    {% endif %}
+   
+    <style>
+        .new_header {
+            padding: 5px 0 0;
+            background: url(/catalog/view/theme/qweb/img/bg-header-top.png) repeat center top;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 15;
+            transition: height .3s ease;
+        }
+        .logo {
+            max-width: 85px;
+            display: block;
+            padding: 10px 0;
+        }
+        .new_header .header-search {
+            border-radius: 0;
+            background-color: transparent;
+            width: 100%;
+            height: 30px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid #fff;
+        }
+        .new_header .header-search__input{
+            height: 30px;
+        }
+        .header-search__button{
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+        }
+        .new_header .header-search__input {
+            padding: 0 10px 0 0px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        .new_header .header-search__input::-webkit-input-placeholder { /* Edge */
+            color: #ffffff;
+            font-weight: 600;
+        }
+        .new_header .header-search__input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: #ffffff;
+            font-weight: 600;
+        }
+        .new_header .header-search__input::placeholder {
+            color: #ffffff;
+            font-weight: 600;
+        }
+        .new_header  .header-search__button {
+            color: #ffffff;
+            font-size: 14px;
+        }
+        .new_header .header-phone__item span {
+            position: absolute;
+            left: 20px;
+            top: 6px;
+        }
+        .new_header .header-phone__item a {
+            color: #060606;
+            padding-left: 25px;
+            font-size: 14px;
+        }
+        .new_header .header-phone__item {
+            margin-bottom: 0px;
+        }
+        .tel_btn {
+            display: flex;
+            align-items: center;
+            border: 0;
+            background: transparent;
+            color: #fff;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        .tel_btn a{
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .li-wh {
+
+        }
+        .li-wh a{
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
+        .dropdown-menu-right a{
+           color: #060606;
+            text-align: center;
+            display: block;
+            font-size: 12px;
+            padding: 5px 0;
+        }
+        .li-wh a i{
+            font-size: 20px;
+        }
+        .header-phone__link a{
+            font-size: 12px;
+            display: block;
+            text-align: center;
+            text-decoration: underline;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+        .secondary-nav-link {
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .icon_menu {
+            max-width: 40px;
+            display: block;
+            text-align: center;
+            margin: 0 auto 5px;
+        }
+        .nav-link{
+            border-bottom: none;
+        }
+        .icon_menu_child{
+            display: block;
+            margin: 0 auto;
+        }
+        .parent-li {
+            margin-bottom: 0;
+        }
+        .header-nav{
+            padding: 0;
+        }
+        @media (min-width:991px) {
+            .content.active{
+                position: relative;
+            }
+            .content.active:after{
+                content: '';
+                background: rgb(0 0 0 / 70%);
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 10;
+                transition: all .3s;
+            }
+            .navs-menus .dropdown:hover > .dropdown-menu,
+            .navs-menus .dropdown-menu.show {
+                display: flex;
+                flex-wrap: wrap;
+                padding: 20px;
+                border-radius: 0;
+            }
+            .navs-menus .dropdown>.dropdown-toggle:active {
+                pointer-events: none;
+            }
+            .child-li{
+                width: 20%;
+                text-align: center;
+                font-size: 12px;
+            }
+            .child-li:hover{
+                background:transparent;
+                box-shadow: 0 0 10px 0 rgba(210,213,220,.8);
+            }
+            .navs-menus .dropdown-menu{
+                width:100%;
+                top: 94%;
+                max-height: 400px;
+                overflow-y: auto;
+                border-bottom: 5px solid #e5c210;
+            }
+            .parent-li,
+            .no_parent_li{
+                position: static;
+                width: 100%;
+            }
+            .secondary-nav-link {
+                font-size: 12px;
+                font-weight: 700;
+                display: block;
+                width: 100%;
+                text-align: center;
+            }
+            .new_header_fixed .namcat-1{
+                display: none;
+            }
+            .new_header_fixed .parent-li .dropdown-toggle::after{
+                display: none;
+            }
+            .new_header_fixed .logo {
+                max-width: 50px;
+                padding: 5px 0;
+            }
+            .new_header_fixed .icon_menu {
+                max-width: 35px;
+                margin: 0 auto 0px;
+            }
+        }
+        @media (max-width:991px){
+            .new_header {
+                z-index: 99992;
+            }
+
+            .icon_menu{
+                display: none;
+            }
+            .icon_menu_child{
+                display: none;
+            }
+            .navbar-nav .dropdown-menu {
+                position: static !important;
+                float: none;
+                transform: none !important;
+            }
+            a.dropdown-item.child-li {
+                font-size: 13px;
+            }
+        }
+        @media (max-width:767px) {
+            .sidebar {
+                top: 75px;
+            }
+            .logo {
+                max-width: 50px;
+            }
+            #search{
+                display: none;
+            }
+            .mob-btn-search {
+                font-size: 16px;
+                display: flex;
+                padding-top: 2px;
+                color: #e5c210;
+            }
+            #search.active{
+                display: block;
+                position: absolute;
+                top: 100%;
+                background: #000;
+                width: 100%;
+                left: 0;
+                padding: 10px 20px;
+                height: auto;
+            }
+            .wr_search{
+                position: static;
+            }
+            .new_header .header-search__button {
+                top: auto;
+            }
+            .h1, h1 {
+                font-size: 1.5rem;
+            }
+        }
+        @media (max-width:565px) {
+            .logo{
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJ89FCBK"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="sidebar">
+    <div class="sidebar-inner">
+        <div class="">
+            <ul class="d-flex top_lks justify-content-end">
+                <li class="ml-4 dropdown li-wh"><a href="{{ account }}" title="{{ text_account }}" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="far fa-user"></i> <span class="caret"></span></a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        {% if logged %}
+                        <li><a href="{{ account }}">{{ text_account }}</a></li>
+                        <li><a href="{{ order }}">{{ text_order }}</a></li>
+                        <li><a href="{{ logout }}">{{ text_logout }}</a></li>
+                        {% else %}
+                        <li><a href="{{ register }}">{{ text_register }}</a></li>
+                        <li><a href="{{ login }}">{{ text_login }}</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+                <li class="ml-3 li-wh"><a href="{{ compare }}" id="compare-total"><i class="fa fa-exchange"></i> <span class="count_head">{{ text_compare }}</span></a></li>
+                <li class="ml-3 li-wh"><a href="{{ wishlist }}" id="wishlist-total"><i class="far fa-star"></i> <span class="count_head">{{ text_wishlist }}</span></a></li>
+            </ul>
+        </div>
+        <div class="sidebar-nav">
+
+            <div class="main-subnav-wrapper2"  id="main-subnav-wrapper-2"></div>
+
+            <ul class="secondary-nav flex-wrap d-flex align-items-center mt-5">
+                <li class="secondary-nav-item">
+                    <a class="secondary-nav-link" href="{{ about_us }}">{{ text_about_us }}</a>
+                </li>
+                <li class="secondary-nav-item">
+                    <a class="secondary-nav-link" href="{{ delivery_and_payment }}">{{ text_delivery_and_payment }}</a>
+                </li>
+                <li class="secondary-nav-item">
+                    <a class="secondary-nav-link" href="{{ contact }}">{{ text_contact_page }}</a>
+                </li>
+            </ul>
+        </div>
+
+{#         
+{{ config_kyivstar |replace({'-':"",'+':"",'(':"",')':"",' ':"","+38":""}) }}
+#} 
+        <div class="sidebar-info d-flex flex-wrap">
+            <ul class="header-phone">
+                <li class="header-phone__item"><span class="icon-kyivstar"></span><a href="tel:{{ config_kyivstar |replace({'-':"",'+':"",'(':"",')':"",' ':"","+38":""}) }}">{{ config_kyivstar }}</a></li>
+                <li class="header-phone__item"><span class="icon-lifecell"></span><a href="tel:{{ config_life |replace({'-':"",'+':"",'(':"",')':"",' ':"","+38":""}) }}">{{ config_life }}</a></li>
+                <li class="header-phone__item"><span class="icon-mts"></span><a href="tel:{{ config_vodafone |replace({'-':"",'+':"",'(':"",')':"",' ':"","+38":""}) }}">{{ config_vodafone }}</a></li>
+            </ul>
+            <ul class="header-info">
+                <li class="header-info__item header-info__email"><a href="mailto:{{ config_email }}">{{ config_email }}</a></li>
+                <li class="header-info__item"><a href="{{ contact }}">{{ text_look_at_map }}</a></li>
+                <li class="header-info__item">{{ config_open }}</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+<div class="main-wrapper">
+
+    <div class="new_header">
+        <div class="container-fluid">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-2 col-sm-2 col-md-1 xs_menu d-lg-none">
+                    <a href="#" class="mobile-trigger">
+                        <span class="hamburger hamburger--collapse">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </span>
+                    </a>
+                </div>
+                <div class="col-4 col-sm-2 col-md-2">
+                    <a href="{{ home }}" class="logo">
+                        <img src="{{ logo }}" alt="{{ name }}">
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-1 col-1 wr_search">
+                    <div class="d-md-none d-lg-none"><div class="mob-btn-search"><span class="icon-search"></span></div></div>
+                    {{ search }}	  
+                </div>
+                <div class="col-md-3 col-sm-1 col-3 phone text-center">
+                    <div class="dropdown">
+                        <button class="tel_btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                           <div class="d-flex mr-2 align-items-center">
+                            <img src="/catalog/view/theme/qweb/image/phone.png" alt="" class="mr-md-2">
+                            <a href="tel:{{ config_kyivstar |replace({'-':"",'+':"",'(':"",')':"",' ':"","+38":""}) }}" class="d-none d-md-block">{{ config_kyivstar }}</a>
+                           </div>
+                        </button>
+                        <div class="dropdown-menu">
+                            <div class="header-phone__item dropdown-item"><span class="icon-kyivstar"></span><a href="tel:{{ config_kyivstar |replace({'-':"",'+':"",'(':"",')':"",' ':"","+38":""}) }}">{{ config_kyivstar }}</a></div>
+                            <div class="header-phone__item dropdown-item"><span class="icon-lifecell"></span><a href="tel:{{ config_life |replace({'-':"",'+':"",'(':"",')':"",' ':"","+38":""}) }}">{{ config_life }}</a></div>
+                            <div class="header-phone__item dropdown-item"><span class="icon-mts"></span><a href="tel:{{ config_vodafone |replace({'-':"",'+':"",'(':"",')':"",' ':"","+38":""}) }}">{{ config_vodafone }}</a></div>
+                            <div class="dropdown-item header-phone__link p-0"><a href="{{ contact }}">{{ text_look_at_map }}</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-2 col-sm-2 col-2">
+                    <ul class="d-flex top_lks justify-content-end">
+                        <li class="d-none d-lg-block">
+                            {{ language }}
+                        </li>
+                        <li class="ml-4 dropdown li-wh d-none d-lg-block"><a href="{{ account }}" title="{{ text_account }}" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="far fa-user"></i> <span class="caret"></span></a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                {% if logged %}
+                                <li><a href="{{ account }}">{{ text_account }}</a></li>
+                                <li><a href="{{ order }}">{{ text_order }}</a></li>
+                                <li><a href="{{ logout }}">{{ text_logout }}</a></li>
+                                {% else %}
+                                <li><a href="{{ register }}">{{ text_register }}</a></li>
+                                <li><a href="{{ login }}">{{ text_login }}</a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        <li class="ml-3 li-wh d-none d-lg-block"><a href="{{ compare }}" id="compare-total"><i class="fa fa-exchange"></i> <span class="count_head">{{ text_compare }}</span></a></li>
+                        <li class="ml-3 li-wh d-none d-lg-block"><a href="{{ wishlist }}" id="wishlist-total"><i class="far fa-star"></i> <span class="count_head">{{ text_wishlist }}</span></a></li>
+                        <li class="ml-3 li-wh">
+                            {{ cart }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="header-nav d-none d-lg-block">
+            <div class="container-fluid">
+                {{ menu }}
+            </div>
+        </div>
+    </div>
+{% if qip == '109.87.69.68' %}
+{% endif %}
+    <main class="content">
+
+
+

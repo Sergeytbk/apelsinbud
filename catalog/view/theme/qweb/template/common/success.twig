@@ -1,0 +1,63 @@
+{{ header }}
+<section class="section section_bottom">
+  <div class="section-border section-border-bottom">
+    <div class="container container-fluid">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          {% for breadcrumb in breadcrumbs %}
+            {% if loop.last %}
+              <li class="breadcrumb-item active" aria-current="page">{{ breadcrumb.text }}</li>
+            {% else %}
+              <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endif %}
+          {% endfor %}
+        </ol>
+      </nav>
+      <div class="title-box">
+        <h1 class="title">{{ heading_title }}</h1>
+      </div>
+
+      <div class="text">
+        {{ text_message }}
+        <div class="buttons">
+          <div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% if order_id %}
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push({
+      'event': 'purchase',
+      'ecommerce': {
+        'transaction_id': '{{ order_id }}',
+        'affiliation': 'Апельсин Буд',
+        'value': '{{ total }}',
+        'currency': 'UAH',
+        'items': [
+          {% set count = 1 %}
+          {% for product in products %}
+          {
+            'item_name': "{{ product['name'] }}",
+            'item_id': '{{ product["product_id"] }}',
+            'price': '{{ product["price"] }}',
+            'item_brand': '{{ product["manuf"] }}',
+            {% set qcoucat = 1 %}
+            {% for qca in product['qcat'] %}
+            {% if qcoucat == 1 %}
+            'item_category': '{{ qca }}',
+            {% else %}
+            'item_category{{ qcoucat }}': '{{ qca }}',
+            {% endif %}
+            {% set qcoucat = qcoucat + 1 %}
+            {% endfor %}
+            'quantity': {{ product["quantity"] }} }{% if count < qconn %},{% endif %}
+          {% set count = count + 1 %}
+          {% endfor %}
+        ] } });
+  </script>
+{% endif %}
+{{ footer }}

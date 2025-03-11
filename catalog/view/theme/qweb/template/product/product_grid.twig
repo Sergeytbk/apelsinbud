@@ -1,0 +1,80 @@
+{% for product in products %}
+    {% if product.stock_status_id == 7 %}
+        {% set avail_class='products-item__avail' %}
+    {% else %}
+        {% set avail_class='products-item__not_avail' %}
+    {% endif %}
+    {% if class is empty %}
+        {% set class = 'col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3' %}
+    {% endif %}
+    <div class="{{ class }}">
+        <div class="products-item">
+            {% if product.special %}
+                {% set percent = ((product.price - product.special) / product.price) * 100 %}
+                <div class="products-item__label">-{{ percent | round }}%</div>
+            {% endif %}
+            {% if product.sticker_new %}
+                <div class="products-item__label products-item__label_green">{{ text_new }}</div>
+            {% endif %}
+            {% if product.sticker_hit %}
+                <div class="products-item__label products-item__label_orange">{{ text_hit }}</div>
+            {% endif %}
+            <a href="{{ product.href }}" class="products-item__img">
+                <img src="{{ product.thumb }}" alt="">
+            </a>
+            <div class="products-item__name">
+                <a href="{{ product.href }}">{{ product.name }}</a>
+            </div>
+            <div class="products-item__bottom">
+                <div class="{{ avail_class }} py-2">{{ product.stock_status }}</div>
+                <div class="products-item__prices d-flex align-items-center justify-content-between">
+                    <div class="products-item__price">
+                        {% if product.special %}
+                            <div class="products-item__price_old">{{ product.price }}</div>
+                            <div class="products-item__price_new">{{ product.special }}</div>
+                        {% else %}
+                            <div class="products-item__price_new">{{ product.price }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="button-group prod_group_btn">
+                        <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>
+                        <button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="fa fa-exchange"></i></button>
+                    </div>
+                </div>
+                
+                
+                {% if product.button_ask_price == false %}
+                    <a href="javascript:void(0);" onclick="cart.add('{{ product.product_id }}');" class="btn btn_yellow btn_sm card_bud"> {{ button_cart }}</a>
+                    <div>
+                        <span class="buyOneClick"></span>
+                    </div>
+                {% else %}
+                    <button type="button" class="ask_price btn btn_yellow btn_sm card_bud" data-id="{{ product.product_id }}">{{ button_price }}</button>
+                {% endif %}
+                <!--<div class="product-grid-options">
+                    {% if product.options %}
+                        {% for option in product.options %}
+                            {% if option.type == 'checkbox' %}
+                                <div class="form-group{% if option.required %} required {% endif %} mb-1">
+                                    <label class="control-label h6 d-block text-center text-black">{{ option.name }} {{ date().timestamp }}</label>
+                                    <div id="input-option{{ option.product_option_id }}">
+                                        {% for option_value in option.product_option_value %}
+                                            <div class="checkbox ml-3 mb-2">
+                                                <input class="styled-checkbox ocf-target" name="option[{{ option.product_option_id }}][]" id="{{ product.prefix }}_{{ product.product_id }}_{{ option.product_option_id }}_{{ option_value.product_option_value_id }}" type="checkbox" value="{{ option_value.product_option_value_id }}">
+                                                <label for="{{ product.prefix }}_{{ product.product_id }}_{{ option.product_option_id }}_{{ option_value.product_option_value_id }}">{{ option_value.name }}
+                                                    {% if option_value.price %}
+                                                        ({{ option_value.price_prefix }}{{ option_value.price }})
+                                                    {% endif %}
+                                                </label>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>-->
+            </div>
+        </div>
+    </div>
+{% endfor %}

@@ -1,0 +1,51 @@
+<file path="admin/controller/design/layout.php" error="skip">
+    <operation error="skip">
+        <search position="before"><![CDATA[$data['extensions'] = array();]]></search>
+        <add position="before"><![CDATA[
+		$this->load->language('jetcache/jetcache');
+		$data['text_replacer_device_all'] = $this->language->get('text_replacer_device_all');
+		$data['text_replacer_device_comp'] = $this->language->get('text_replacer_device_comp');
+		$data['text_replacer_device_mob'] = $this->language->get('text_replacer_device_mob');
+		$data['text_replacer_device_smart'] = $this->language->get('text_replacer_device_smart');
+		$data['text_replacer_device_pad'] = $this->language->get('text_replacer_device_pad');
+    ]]></add>
+    </operation>
+    <operation error="skip">
+        <search position="before"><![CDATA[$data['layout_modules'][]]]></search>
+        <add position="before"><![CDATA[
+					// Jet Cache code
+					if (!isset($layout_module['device'])) {
+						$layout_module['device'] = 0;
+					}
+					//End of Jet Cache code
+    ]]></add>
+    </operation>
+    <operation error="skip">
+        <search position="after"><![CDATA[$layout_module['code'],]]></search>
+        <add position="after"><![CDATA[						'device'     => $layout_module['device'],]]></add>
+    </operation>
+</file>
+
+<file path="admin/model/design/layout.php" error="skip">
+	<operation error="skip">
+        <search regex="true" position="replace"><![CDATA[~(.*?)position.*?[=](.*?)[;]~]]></search>
+        <add position="replace"><![CDATA[
+$1device = '" . (int)$layout_module['device'] . "', position =$2;
+    ]]></add>
+	</operation>
+</file>
+
+<file path="catalog/model/design/layout.php" error="skip">
+    <operation error="skip">
+        <search position="before"><![CDATA[return $query->rows;]]></search>
+        <add position="before"><![CDATA[
+		// Jet Cache code
+        if (isset($layout_id) && isset($position)) {
+			if (is_callable(array('ControllerJetcacheJetcache', 'hook_layout'))) {
+				$query->rows = $this->controller_jetcache_jetcache->hook_layout($query->rows);
+			}
+        }
+		// End of Jet Cache code
+]]></add>
+    </operation>
+</file>

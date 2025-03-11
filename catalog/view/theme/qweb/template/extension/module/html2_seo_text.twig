@@ -1,0 +1,8 @@
+<div class="text text_grey">
+    <h2 class="text-title">{{ title }}</h2>
+        {{ text | html_entity_decode }}
+    <div class="text-hidden">
+        {{ text_hidden | html_entity_decode }}
+    </div>
+    <a href="#" class="link-more js-link-more"><i>{{ text_red_more }}</i><i class="link-more__hidden">{{ text_red_less }}</i> <span class="icon-down-arrow"></span></a>
+</div>

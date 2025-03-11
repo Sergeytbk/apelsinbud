@@ -1,0 +1,233 @@
+{{ header }}{{ column_left }} 
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-google-business-data" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %} 
+        <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+        {% endfor %} 
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if (error_warning) %} 
+    <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }} 
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %} 
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-google-merchant-center" class="form-horizontal">
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+            <div class="col-sm-10">
+              <select name="google_merchant_center_status" id="input-google-merchant-center-status" class="form-control">
+                {% if (google_merchant_center_status) %} 
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+                {% else %} 
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %} 
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-file"><span data-toggle="tooltip" data-html="true" title="{{ help_file|escape }}">{{ entry_file }}</span></label>
+            <div class="col-sm-10">
+              <select name="google_merchant_center_file" id="input-google-merchant-center-file" class="form-control">
+                {% if (google_merchant_center_file) %} 
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+                {% else %} 
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %} 
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+			<label class="col-sm-2 control-label" for="input-data-feed"><span data-toggle="tooltip" data-html="true" title="{{ help_data_feed|escape }}">{{ entry_data_feed }}</span></label>
+            <div class="col-sm-10">
+              <textarea rows="5" id="input-data-feed" class="form-control" readonly>{{ data_feed }}</textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-google-merchant-base"><span data-toggle="tooltip" data-html="true" title="{{ help_google_merchant_base|escape }}">{{ entry_google_merchant_base }}</span></label>
+            <div class="col-sm-10">
+            	<div class="well well-sm" style="height: 150px; overflow: auto;">
+					{% for merchant_category in google_merchant_base_category %} 
+						<div class="checkbox">
+							<label>
+							{% if (merchant_category['status'] == "1") %} 
+							<input type="checkbox" name="google_merchant_base[]" value="{{ merchant_category['taxonomy_id'] }}" checked="checked" />
+							{{ merchant_category['name'] }} 
+							{% else %} 
+							<input type="checkbox" name="google_merchant_base[]" value="{{ merchant_category['taxonomy_id'] }}" />
+							{{ merchant_category['name'] }} 
+                          {% endif %} 
+                        </label>
+                      </div>
+                      {% endfor %} 
+                    </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="google-merchant-center-description">{{ entry_google_merchant_center_description }}</label>
+            <div class="col-sm-10">
+              <select name="google_merchant_center_description" id="google-merchant-center-description" class="form-control">
+                {% if (google_merchant_center_description) %} 
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+                {% else %} 
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %} 
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="google-merchant-center-description-html">{{ entry_google_merchant_center_description_html }}</label>
+            <div class="col-sm-10">
+              <select name="google_merchant_center_description_html" id="google-merchant-center-description-html" class="form-control">
+                {% if (google_merchant_center_description_html) %} 
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+                {% else %} 
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %} 
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-google-merchant-center-attribute"><span data-toggle="tooltip" data-html="true" title="{{ help_google_merchant_center_attribute|escape }}">{{ entry_google_merchant_center_attribute }}</span></label>
+            <div class="col-sm-10">
+              <select name="google_merchant_center_attribute" id="input-google-merchant-center-attribute" class="form-control" style="max-width: 90%;">
+				{% for merchant_center_attribute in merchant_center_attributes %} 
+					{% if (google_merchant_center_attribute == merchant_center_attribute['attribute_id']) %} 
+						<option value="{{ merchant_center_attribute['attribute_id'] }}" selected="selected">{{ merchant_center_attribute['name'] }}</option>
+					{% else %} 
+						<option value="{{ merchant_center_attribute['attribute_id'] }}">{{ merchant_center_attribute['name'] }}</option>
+					{% endif %} 
+				{% endfor %} 
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-google-merchant-center-attribute-type"><span data-toggle="tooltip" data-html="true" title="{{ help_google_merchant_center_attribute_type|escape }}">{{ entry_google_merchant_center_attribute_type }}</span></label>
+            <div class="col-sm-10">
+              <select name="google_merchant_center_attribute_type" id="input-google-merchant-center-attribute-type" class="form-control" style="max-width: 90%;">
+				{% for merchant_center_type in merchant_center_attributes_type %} 
+					{% if (google_merchant_center_attribute_type == merchant_center_type['attribute_id']) %} 
+						<option value="{{ merchant_center_type['attribute_id'] }}" selected="selected">{{ merchant_center_type['name'] }}</option>
+					{% else %} 
+						<option value="{{ merchant_center_type['attribute_id'] }}">{{ merchant_center_type['name'] }}</option>
+					{% endif %} 
+				{% endfor %} 
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-google-merchant-center-option"><span data-toggle="tooltip" data-html="true" title="{{ help_google_merchant_center_option|escape }}">{{ entry_google_merchant_center_option }}</span></label>
+            <div class="col-sm-10">
+              <select name="google_merchant_center_option" id="input-google-merchant-center-option" class="form-control" style="max-width: 90%;">
+				{% for merchant_option in merchant_center_option %} 
+					{% if (google_merchant_center_option == merchant_option['option_id']) %} 
+						<option value="{{ merchant_option['option_id'] }}" selected="selected">{{ merchant_option['name'] }}</option>
+					{% else %} 
+						<option value="{{ merchant_option['option_id'] }}">{{ merchant_option['name'] }}</option>
+					{% endif %} 
+				{% endfor %} 
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-google-merchant-center-availability"><span data-toggle="tooltip" data-html="true" title="{{ help_google_merchant_center_availability|escape }}">{{ entry_google_merchant_center_availability }}</span></label>
+            <div class="col-sm-10">
+              <select name="google_merchant_center_availability" id="input-google-merchant-center-availability" class="form-control">
+                {% if (google_merchant_center_availability == 'in stock') %} 
+                	<option value="in stock" selected="selected">{{ 'in stock' }}</option>
+                	<option value="out of stock">{{ 'out of stock' }}</option>
+					<option value="preorder">{{ 'preorder' }}</option>
+				  <option value="skip products">{{ 'skip products' }}</option>
+                {% elseif (google_merchant_center_availability == 'out of stock') %} 
+                	<option value="in stock">{{ 'in stock' }}</option>
+                	<option value="out of stock" selected="selected">{{ 'out of stock' }}</option>
+					<option value="preorder">{{ 'preorder' }}</option>
+				  <option value="skip products">{{ 'skip products' }}</option>
+                {% elseif (google_merchant_center_availability == 'preorder') %} 
+              		<option value="in stock">{{ 'in stock' }}</option>
+                	<option value="out of stock">{{ 'out of stock' }}</option>
+					<option value="preorder" selected="selected">{{ 'preorder' }}</option>
+				  	<option value="skip products">{{ 'skip products' }}</option>
+				{% else %} 
+              		<option value="in stock">{{ 'in stock' }}</option>
+                	<option value="out of stock">{{ 'out of stock' }}</option>
+					<option value="preorder">{{ 'preorder' }}</option>
+				  	<option value="skip products" selected="selected">{{ 'skip products' }}</option>
+                {% endif %} 
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-google-merchant-center-shipping-flat"><span data-toggle="tooltip" data-html="true" title="{{ help_google_merchant_center_shipping_flat|escape }}">{{ entry_google_merchant_center_shipping_flat }}</span></label>
+            <div class="col-sm-10">
+				<input type="text" name="google_merchant_center_shipping_flat" value="{{ google_merchant_center_shipping_flat }}" placeholder="{{ entry_google_merchant_center_shipping_flat }}" id="input-google-merchant-center-shipping-flat" class="form-control" />
+            </div>
+          </div>
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="google-merchant-center-feed-id1"><span data-toggle="tooltip" data-html="true" title="{{ help_google_merchant_center_feed_id1|escape }}">{{ entry_google_merchant_center_feed_id1 }}</span></label>
+				<div class="col-sm-10">
+					<select name="google_merchant_center_feed_id1" id="google-merchant-center-feed-id1" class="form-control">
+                      {% if (google_merchant_center_feed_id1 == 'model') %} 
+						<option value="model" selected="selected">{{ 'model' }}</option>
+						<option value="product_id">{{ 'product_id' }}</option>
+                      {% else %} 
+						<option value="product_id" selected="selected">{{ 'product_id' }}</option>
+						<option value="model">{{ 'model' }}</option>
+                      {% endif %} 
+					</select>
+				</div>
+			</div>
+			
+		   <div class="form-group">
+			<label class="col-sm-2 control-label" for="google-merchant-center-use-taxes"><span data-toggle="tooltip" data-html="true" title="{{ help_google_merchant_center_use_taxes|escape }}">{{ entry_google_merchant_center_use_taxes }}</span></label>
+            <div class="col-sm-10">
+              <select name="google_merchant_center_use_taxes" id="google-merchant-center-use-taxes" class="form-control">
+                {% if (google_merchant_center_use_taxes == 2) %} 
+                <option value="0">{{ text_enabled_default }}</option>
+                <option value="2" selected="selected">{{ text_disabled }}</option>
+				  {% else %} 
+                <option value="0" selected="selected">{{ text_enabled_default }}</option>
+                <option value="2">{{ text_disabled }}</option>
+				  {% endif %} 
+              </select>
+            </div>
+          </div>
+			
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{ footer }} 

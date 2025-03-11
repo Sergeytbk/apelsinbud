@@ -1,0 +1,30 @@
+{{ header }}
+<section class="section section_bottom">
+  <div class="section-border section-border-bottom">
+    <div class="container container-fluid">
+
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          {% for breadcrumb in breadcrumbs %}
+            {% if loop.last %}
+              <li class="breadcrumb-item active" aria-current="page">{{ breadcrumb.text }}</li>
+            {% else %}
+              <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endif %}
+          {% endfor %}
+        </ol>
+      </nav>
+
+      <div class="title-box">
+        <h1 class="title">{{ heading_title }}</h1>
+      </div>
+
+      <div class="text">
+        {{ description}}
+      </div>
+
+      {{ content_bottom }}
+    </div>
+  </div>
+</section>
+{{ footer }}

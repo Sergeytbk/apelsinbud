@@ -1,0 +1,14 @@
+<file path="system/engine/controller.php" error="skip">
+	<operation error="skip">
+        <search position="before"><![CDATA[if (file_exists(DIR_TEMPLATE]]></search>
+        <add position="before"><![CDATA[
+		// Data for Jet Cache
+		if (!defined('DIR_CATALOG')) {
+			if (!is_array($this->registry->get('jc_data_view'))) {
+				$this->registry->set('jc_data_view', array());	
+			}
+			$this->registry->set('jc_data_view', array_merge($this->registry->get('jc_data_view'), $this->data));
+		}	
+    ]]></add>
+	</operation>
+</file>

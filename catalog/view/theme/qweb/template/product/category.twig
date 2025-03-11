@@ -1,0 +1,76 @@
+{{ header }}
+<!--is_category_page-->
+<section class="section section_bottom">
+  <div class="section-border section-border-bottom">
+    <div class="container container-fluid">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          {% for breadcrumb in breadcrumbs %}
+            {% if loop.last %}
+              <li class="breadcrumb-item active" aria-current="page">{{ breadcrumb.text }}</li>
+            {% else %}
+              <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endif %}
+          {% endfor %}
+        </ol>
+      </nav>
+      <div class="title-box">
+        <h1 class="title">{{ heading_title }}</h1>
+      </div>
+      <div class="section-aside d-flex flex-wrap">
+        <div class="aside">
+            {{ column_left }}
+        </div>
+        <div class="content-aside">
+          <div class="products">
+            <div class="row">
+              {{ products }}
+            </div>
+          </div>
+            {% if products %}
+              <nav aria-label="pagination">
+                {{ pagination }}
+              </nav>
+            {% else %}
+                <div class="d-flex justify-content-center mb-4">
+                    {{ text_empty }}
+                </div>
+                <div class="d-flex justify-content-center"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
+            {% endif %}
+        </div>
+      </div>
+      <div class="think category">
+        <think_text></think_text>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  dataLayer.push({
+    'event': 'view_item_list',
+    'ecommerce': {
+      'items': [
+        {% set count = 1 %}
+        {% for product in products2 %}
+        {
+          'item_name': "{{ product['name'] }}",
+          'item_id': '{{ product["product_id"] }}',
+          'price': '{{ product["price2"] }}',
+          'item_brand': '{{ product["manuf"] }}',
+          {% set qcoucat = 1 %}
+          {% for qca in product['qcat'] %}
+          {% if qcoucat == 1 %}
+          'item_category': '{{ qca }}',
+          {% else %}
+          'item_category{{ qcoucat }}': '{{ qca }}',
+          {% endif %}
+          {% set qcoucat = qcoucat + 1 %}
+          {% endfor %}
+          'item_list_name': '{{ qurr }}'
+        }{% if count < qconn %},{% endif %}
+        {% set count = count + 1 %}
+        {% endfor %}
+      ] } });
+</script>
+{{ footer }}

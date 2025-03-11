@@ -1,0 +1,362 @@
+{{ header }}
+
+<section class="section section_bottom">
+    <div class="section-border section-border-bottom">
+        <div class="container container-fluid">
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    {% for breadcrumb in breadcrumbs %}
+                        {% if loop.last %}
+                            <li class="breadcrumb-item active" aria-current="page">{{ breadcrumb.text }}</li>
+                        {% else %}
+                            <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ol>
+            </nav>
+
+            <div class="title-box d-lg-none">
+                <div class="title title_noborder">{{ heading_title }}</div>
+            </div>
+
+            <div class="product__avail  d-lg-none">{{ stock_status }}</div>
+
+            <div class="product">
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <div class="product-images">
+                            <div class="row justify-content-center justify-content-lg-start">
+                                {% if thumb %}
+                                    <div class="col-12">
+                                        <a href="{{ popup }}" class="product-images-main" data-fancybox="images">
+                                            {% if special %}
+                                                {% set percent = ((price - special) / price) * 100 %}
+                                                <div class="products-item__label product-label">-{{ percent | round }}%</div>
+                                            {% endif %}
+                                            {% if sticker_new %}
+                                                <div class="products-item__label product-label products-item__label_green">{{ text_new }}</div>
+                                            {% endif %}
+                                            {% if sticker_hit %}
+                                                <div class="products-item__label product-label products-item__label_orange">{{ text_hit }}</div>
+                                            {% endif %}
+                                            <img src="{{ thumb }}" alt="{{ heading_title }}">
+                                        </a>
+                                    </div>
+                                {% endif %}
+                                {% if images %}
+                                    {% for image in images %}
+                                        <div class="col col-4 col-sm-3 col-md-2 col-lg-4">
+                                            <a href="{{ image.popup }}" class="product-images-main product-images-main_sm" data-fancybox="images">
+                                                <img src="{{ image.thumb }}" alt="{{ heading_title }}">
+                                            </a>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6" id="product">
+                        <div class="d-flex justify-content-end">
+                            <div class="btn-group btn-group-sm mb-3 mt-1">
+                                <button type="button" data-toggle="tooltip" class="btn btn-default btn-sm" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product_id }}');"><i class="fa fa-heart"></i></button>
+                                <button type="button" data-toggle="tooltip" class="btn btn-default btn-sm" title="{{ button_compare }}" onclick="compare.add('{{ product_id }}');"><i class="fa fa-exchange"></i></button>
+                            </div>
+                        </div>
+                        
+                        <div class="title-box d-none d-lg-flex">
+                            <h1 class="title title_noborder">{{ heading_title }}</h1>
+                        </div>
+                        {% if stock_status_id == 7 %}
+                            {% set avail_class='products-item__avail' %}
+                        {% else %}
+                            {% set avail_class='products-item__not_avail' %}
+                        {% endif %}
+                        
+                        <div class="{{ avail_class }} mb-3">{{ stock }}</div>
+                        <div class="product__prices">
+                            {% if button_ask_price == false %}
+                                <div class="price product__price d-flex align-items-center mb-3">
+                               
+                                    {% if special %}
+                                        <div class="product__price_old">{{ price }}<span>{% if unit %}/{{ unit }}{% endif %}</span></div>
+                                        <div class="product__price_new">{{ special }}<span>{% if unit %}/{{ unit }}{% endif %}</span></div>
+                                    {% else %}
+                                        <div class="product__price_new">{{ price }}<span>{% if unit %}/{{ unit }}{% endif %}</span></div>
+                                    {% endif %}
+                                    
+                                </div>
+                                
+                            {% endif %}  
+                            <div class="all_btn d-flex flex-wrap align-items-center">
+                                {% if button_ask_price == false %}
+                                    <div class="mr-sm-3">
+                                        <input type="number" name="quantity" value="{{ minimum }}" size="2" id="input-quantity" class="form-control" />
+                                        <input type="hidden" name="product_id" value="{{ product_id }}" />
+                                    </div>
+                                    <a href="javascript:void(0)" id="button-cart" class="btn btn_yellow mr-1">{{ button_cart }}</a>
+                                    {% if options %}
+                                    {% else %}
+                                        <span class="buyOneClick"></span>
+                                    {% endif %}
+                                
+                                {% else %}
+                                    <button type="button" class="ask_price btn btn_yellow mt-3" data-id="{{ product_id }}">{{ button_price }}</button>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {#<div class="d-flex align-items-center justify-content-center mb-3">#}
+                            {#<span class="buyOneClick"></span>#}
+                        {#</div>#}
+                        {% if button_ask_price == false %}
+                        {% if options %}
+                            {% for option in options %}
+                                {% if option.type == 'checkbox' %}
+                                    <div class="form-group{% if option.required %} required {% endif %} mb-4">
+                                        <div class="control-label h5">{{ option.name }}</div>
+                                        <div id="input-option{{ option.product_option_id }}">
+                                            {% for option_value in option.product_option_value %}
+                                                <div class="checkbox ml-3 mb-2">
+                                                    <input class="styled-checkbox ocf-target" name="option[{{ option.product_option_id }}][]" id="{{ option.product_option_id }}_{{ option_value.product_option_value_id }}" type="checkbox" value="{{ option_value.product_option_value_id }}">
+                                                    <label for="{{ option.product_option_id }}_{{ option_value.product_option_value_id }}">{{ option_value.name }}
+                                                        {% if option_value.price %}
+                                                            ({{ option_value.price_prefix }}{{ option_value.price }})
+                                                        {% endif %}
+                                                    </label>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                {% if option.type == 'select' %}
+                                    <div class="form-group{% if option.required %} required {% endif %}">
+                                    <label class="control-label h5" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
+                                    <select name="option[{{ option.product_option_id }}]" id="input-option{{ option.product_option_id }}" class="form-control">
+                                        <option value="">{{ text_select }}</option>
+                                        {% for option_value in option.product_option_value %}
+                                        <option value="{{ option_value.product_option_value_id }}">{{ option_value.name }}
+                                        {% if option_value.price %}
+                                        ({{ option_value.price_prefix }}{{ option_value.price }})
+                                        {% endif %} </option>
+                                        {% endfor %}
+                                    </select>
+                                    </div>
+                                {% endif %}
+                                {% if option.type == 'radio' %}
+                                    <div class="form-group{% if option.required %} required {% endif %}">
+                                    <div class="control-label h5">{{ option.name }}</div>
+                                    <div class="row" id="input-option{{ option.product_option_id }}"> {% for option_value in option.product_option_value %}
+                                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 radio radio_opt">
+                                            <label>
+                                                <input type="radio" name="option[{{ option.product_option_id }}]" value="{{ option_value.product_option_value_id }}" />
+                                                <div class="set_rad_opt">
+                                                {% if option_value.image %} <div class="radio_opt_img mb-2"><img src="{{ option_value.image }}" alt="{{ option_value.name }} {% if option_value.price %} {{ option_value.price_prefix }} {{ option_value.price }} {% endif %}" class="img-fluid" /> </div>{% endif %}                  
+                                                <span class="radio_opt_name">{{ option_value.name }}</span>
+                                                {% if option_value.price %}
+                                                ({{ option_value.price_prefix }}{{ option_value.price }})
+                                                {% endif %} 
+                                                </div>
+                                            </label>
+                                        </div>
+                                        {% endfor %} </div>
+                                    </div>
+                                {% endif %}
+
+
+                            {% endfor %}
+                        {% endif %}
+                        {% endif %}
+                        {% if guarantee %}
+                        <div class="product__garantee"><span class="icon-ribbon"></span>{{ text_guarantee }} <b>{{ guarantee }}</b></div>
+                        {% endif %}
+
+                        <div class="product-info">
+                            {% if description %}
+                            <div class="info">
+                                <div class="info__title active">{{ tab_description }}: <span class="icon-down-arrow"></span></div>
+                                <div class="info__content" style="display: block;">
+                                    <div class="text">
+                                        {{ description }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if (features or attribute_groups) %}
+                            <div class="info">
+                                <div class="info__title">{{ text_product_characters }}: <span class="icon-down-arrow"></span></div>
+                                <div class="info__content">
+                                    <div class="text">
+
+                                        {% if attribute_groups %}
+                                            <div class="tab-pane" id="tab-specification">
+                                                <table class="table table-bordered">
+                                                    {% for attribute_group in attribute_groups %}
+                                                        <tbody>
+                                                        {% for attribute in attribute_group.attribute %}
+                                                            <tr>
+                                                                <td>{{ attribute.name }}</td>
+                                                                <td>{{ attribute.text }}</td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                        </tbody>
+                                                    {% endfor %}
+                                                </table>
+                                            </div>
+                                        {% endif %}
+                                        {{ features | html_entity_decode }}
+
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            {% if complectations %}
+                                <div class="info">
+                                    <div class="info__title">{{ text_product_complectation }}: <span class="icon-down-arrow"></span></div>
+                                    <div class="info__content">
+                                        <div class="text">
+                                            {{ complectations | html_entity_decode }}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            {% if products %}
+            <div class="title-box">
+                <h2 class="title">{{ text_related }}</h2>
+            </div>
+
+            <div class="products">
+                <div class="row">
+                    {{ products }}
+                </div>
+            </div>
+            {% endif %}
+
+
+        </div>
+    </div>
+</section>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push({
+        'event': 'view_item',
+        'ecommerce': {
+            'items': [{ 'item_name': "{{ heading_title }}",
+                'item_id': '{{ product_id }}',
+                'price': '{{ price2 }}',
+                'item_brand': '{{ manufacturer }}',
+                {% set qcoucat = 1 %}
+                {% for qca in qcat %}
+                {% if qcoucat == 1 %}
+                'item_category': '{{ qca }}',
+                {% else %}
+                'item_category{{ qcoucat }}': '{{ qca }}',
+                {% endif %}
+                {% set qcoucat = qcoucat + 1 %}
+                {% endfor %}
+                'quantity': '1' }] } });
+</script>
+<script type="text/javascript"><!--
+$('#button-cart').on('click', function() {
+	$.ajax({
+		url: 'index.php?route=checkout/cart/add',
+		type: 'post',
+		/*data: $('#product input[type=\'text\'], #product input[type=\'hidden\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea'),*/
+        data: $('#product input[type=\'text\'], #product input[type=\'number\'],  #product input[type=\'hidden\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea'),
+		dataType: 'json',
+		beforeSend: function() {
+			$('#button-cart').button('loading');
+		},
+		complete: function() {
+			$('#button-cart').button('reset');
+		},
+		success: function(json) {
+			$('.alert-dismissible, .text-danger').remove();
+			$('.form-group').removeClass('has-error');
+
+			if (json['error']) {
+				if (json['error']['option']) {
+					for (i in json['error']['option']) {
+						var element = $('#input-option' + i.replace('_', '-'));
+
+						if (element.parent().hasClass('input-group')) {
+							element.parent().after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
+						} else {
+							element.after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
+						}
+					}
+				}
+
+                Swal.fire({
+                        title: '',
+                        html: json['error']['option'][i],
+                        type: "success",
+                        timer: 2500,
+
+                });
+
+				// Highlight any found errors
+				$('.text-danger').parent().addClass('has-error');
+			}
+
+			if (json['success']) {
+
+                window.dataLayer = window.dataLayer || [];
+                dataLayer.push({ ecommerce: null });
+                dataLayer.push({
+                    'event': 'add_to_cart',
+                    'ecommerce': {
+                        'items': [{ 'item_name': "{{ heading_title }}",
+                            'item_id': '{{ product_id }}',
+                            'price': '{{ price2 }}',
+                            'item_brand': '{{ manufacturer }}',
+                            {% set qcoucat = 1 %}
+                            {% for qca in qcat %}
+                            {% if qcoucat == 1 %}
+                            'item_category': '{{ qca }}',
+                            {% else %}
+                            'item_category{{ qcoucat }}': '{{ qca }}',
+                            {% endif %}
+                            {% set qcoucat = qcoucat + 1 %}
+                            {% endfor %}
+                            'quantity': $('#input-quantity').val() }] } });
+
+                Swal.fire({
+                        title: json['swal_title'],
+                        html: json['success'],
+                        type: "success",
+                        showCancelButton: true,
+                        confirmButtonClass: "btn-danger",
+                        confirmButtonText: json['confirmButtonText'],
+                        cancelButtonText: json['cancelButtonText'],
+                        closeOnConfirm: false,
+                        closeOnCancel: true,
+                        confirmButtonColor: '#000',
+
+                    }
+                ).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/index.php?route=checkout/checkout";
+                    }
+                });
+
+                $('#total-items').text(json['total_items']);
+                $('#total-cart').text(json['total_cart']);
+			}
+		},
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+	});
+});
+//--></script> 
+{{ footer }}

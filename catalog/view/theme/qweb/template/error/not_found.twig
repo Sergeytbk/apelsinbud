@@ -1,0 +1,39 @@
+{{ header }}
+<section class="section section_bottom">
+  <div class="section-border section-border-bottom">
+    <div class="container container-fluid">
+      <div id="error-not-found" class="container">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+              {% if loop.last %}
+                <li class="breadcrumb-item active" aria-current="page">{{ breadcrumb.text }}</li>
+              {% else %}
+                <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+              {% endif %}
+            {% endfor %}
+          </ol>
+        </nav>
+        <div class="row">{{ column_left }}
+          {% if column_left and column_right %}
+          {% set class = 'col-sm-6' %}
+          {% elseif column_left or column_right %}
+          {% set class = 'col-sm-9' %}
+          {% else %}
+          {% set class = 'col-sm-12' %}
+          {% endif %}
+          <div id="content" class="{{ class }}">{{ content_top }}
+            <div class="title-box">
+              <h1 class="title">{{ heading_title }}</h1>
+            </div>
+            <p>{{ text_error }}</p>
+            <div class="buttons clearfix mt-5">
+              <div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
+            </div>
+            {{ content_bottom }}</div>
+          {{ column_right }}</div>
+      </div>
+    </div>
+  </div>
+</section>
+{{ footer }}

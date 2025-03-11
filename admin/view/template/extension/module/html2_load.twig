@@ -1,0 +1,170 @@
+{% set items = {} %}
+<div id="migx-{{ migx_name }}-{{ migx_id }}" data-migx-name="{{ migx_name }}" data-migx-id="{{ migx_id }}" class="modal fade modal-migx" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title text-center">{{ migx_id + 1 }}</h4>
+            </div>
+            <div class="modal-body">
+                    {% for field in fields.all %}
+                        {% if field.type == 'text' %}
+                            {% if field.head %}
+                                {% set items = items|merge([{'name': field.name,'value': field.value}]) %}
+                            {% endif %}
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-{{ field.name }}-{{ migx_id }}">{{ field.title }}</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="migx[{{ migx_name }}][{{ migx_id }}][{{ field.name }}]" value="{{ field.value }}" placeholder="{{ field.title }}"
+                                           id="input-{{ field.name }}-{{ migx_id }}" class="form-control"/>
+                                </div>
+                            </div>
+                        {% elseif field.type == 'textarea' %}
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-{{ field.name }}-{{ migx_id }}">{{ field.title }}</label>
+                                <div class="col-sm-10">
+                <textarea  name="migx[{{ migx_name }}][{{ migx_id }}][{{ field.name }}]" rows="5" placeholder="{{ field.title }}" id="input-{{ field.name }}-{{ migx_id }}"
+                           class="form-control">{{ field.value }}</textarea>
+                                </div>
+                            </div>
+                        {% elseif field.type == 'summernote' %}
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-{{ field.name }}-{{ migx_id }}">{{ field.title }}</label>
+                                <div class="col-sm-10">
+                <textarea data-toggle="summernote"  name="migx[{{ migx_name }}][{{ migx_id }}][{{ field.name }}]" rows="5" placeholder="{{ field.title }}"
+                          id="input-{{ field.name }}-{{ migx_id }}" class="form-control">{{ field.value }}</textarea>
+                                </div>
+                            </div>
+                        {% elseif field.type == 'image' %}
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-{{ field.name }}-{{ migx_id }}">{{ field.title }}</label>
+                                <div class="col-sm-10">
+                                    <a href="" id="thumb-{{ field.name }}-{{ migx_id }}" data-toggle="image" class="img-thumbnail"><img
+                                                src="{{ field.thumb }}" alt="" title="" data-placeholder="{{ field.title }}"/></a>
+                                    <input type="hidden"  name="migx[{{ migx_name }}][{{ migx_id }}][{{ field.name }}]" value="{{ field.value }}"
+                                           id="input-{{ field.name }}-{{ migx_id }}"/></td>
+                                </div>
+                            </div>
+                        {% else %}
+                            undefined type just - {{ field.type }}
+                        {% endif %}
+                    {% endfor %}
+                    {% if fields.lang %}
+                        <div class="tab-pane">
+                            <ul class="nav nav-tabs" id="migx_language">
+                                {% for language in languages %}
+                                    <li class="{% if loop.first %}active{% endif %}">
+                                        <a href="#language{{ language.language_id }}-{{ migx_name }}-{{ migx_id }}" data-toggle="tab" aria-expanded="{% if loop.first %}true{% else %}false{% endif %}">
+                                            <img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}"/>
+                                            {{ language.name }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            <div class="tab-content">
+                                {% for language in languages %}
+                                    <div class="tab-pane {% if loop.first %}active{% endif %}" id="language{{ language.language_id }}-{{ migx_name }}-{{ migx_id }}">
+                                        {% for field in fields.lang %}
+                                            {% if field.type == 'text' %}
+                                                {% if field.head and default_lang_id == language.language_id %}
+                                                    {% set items = items|merge([{'name': field.name,'value':  field.value[language.language_id] }]) %}
+                                                {% endif %}
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label"
+                                                           for="input-{{ field.name }}-{{ migx_id }}">{{ field.title }}</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text"
+                                                               name="migx[{{ migx_name }}][{{ migx_id }}][module_description][{{ language.language_id }}][{{ field.name }}]"
+                                                               value="{{ field.value[language.language_id] }}"
+                                                               placeholder="{{ field.title }}" id="input-{{ field.name }}-{{ migx_id }}"
+                                                               class="form-control"/>
+                                                    </div>
+                                                </div>
+                                            {% elseif field.type == 'image' %}
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label"
+                                                           for="input-{{ field.name }}-{{ language.language_id }}-{{ migx_id }}">{{ field.title }}</label>
+                                                    <div class="col-sm-10">
+                                                        <a href="" id="thumb-{{ field.name }}-{{ language.language_id }}-{{ migx_id }}" data-toggle="image"
+                                                           class="img-thumbnail"><img
+                                                                    src="{{ field.thumb[language.language_id] }}" alt=""
+                                                                    title="" data-placeholder="{{ field.title }}"/></a>
+                                                        <input type="hidden"
+                                                               name="migx[{{ migx_name }}][{{ migx_id }}][module_description][{{ language.language_id }}][{{ field.name }}]"
+                                                               value="{{ field.value[language.language_id] }}"
+                                                               id="input-{{ field.name }}-{{ language.language_id }}-{{ migx_id }}"/></td>
+                                                    </div>
+                                                </div>
+                                            {% elseif field.type == 'textarea' %}
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label"
+                                                           for="input-{{ field.name }}{{ language.language_id }}-{{ migx_id }}">{{ field.title }}</label>
+                                                    <div class="col-sm-10">
+                                                <textarea
+                                                        name="migx[{{ migx_name }}][{{ migx_id }}][module_description][{{ language.language_id }}][{{ field.name }}]"
+                                                        rows="5" placeholder="{{ field.title }}"
+                                                        id="input-{{ field.name }}{{ language.language_id }}-{{ migx_id }}"
+                                                        class="form-control">{{ field.value[language.language_id] }}</textarea>
+                                                    </div>
+                                                </div>
+                                            {% elseif field.type == 'summernote' %}
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label"
+                                                           for="input-{{ field.name }}{{ language.language_id }}-{{ migx_id }}">{{ field.title }}</label>
+                                                    <div class="col-sm-10">
+                                                <textarea data-toggle="summernote"
+                                                          name="migx[{{ migx_name }}][{{ migx_id }}][module_description][{{ language.language_id }}][{{ field.name }}]"
+                                                          rows="5" placeholder="{{ field.title }}"
+                                                          id="input-{{ field.name }}{{ language.language_id }}-{{ migx_id }}"
+                                                          class="form-control">{{ field.value[language.language_id] }}</textarea>
+                                                    </div>
+                                                </div>
+                                            {% else %}
+                                                undefined type - {{ field.type }}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $('#migx-{{ migx_name }}-{{ migx_id }}').on('hidden.bs.modal', function (event) {
+        var tr = $('tr[data-migx-name="{{ migx_name }}"][data-migx-id="{{ migx_id }}"]');
+        {% for item in items %}
+            var text = $(event.target).find('#input-{{ item.name }}-{{ migx_id }}').val();
+            if(text == undefined){
+                text = $(event.target).find('#input-{{ field.name }}{{ default_lang_id }}-{{ migx_id }}').val();
+            }
+            tr.find('td[data-title="{{ item.name }}"]').text(text);
+        {% endfor %}
+    })
+</script>
+
+{% if not disable_tr %}
+<tr data-migx-name="{{ migx_name }}" data-migx-id="{{ migx_id }}">
+    <td>{{ migx_id + 1 }}</td>
+    {% for item in items %}
+        <td data-title="{{ item.name }}">{{ item.value }}</td>
+    {% endfor %}
+    <td>
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#migx-{{ migx_name }}-{{ migx_id }}">
+            <i class="fa fa-pencil"></i>
+        </button>
+        <button type="button" class="btn btn-danger btn-lg removeThisMigx" data-target="#migx-{{ migx_name }}-{{ migx_id }}">
+            <i class="fa fa-trash-o"></i>
+        </button>
+    </td>
+</tr>
+{% endif %}

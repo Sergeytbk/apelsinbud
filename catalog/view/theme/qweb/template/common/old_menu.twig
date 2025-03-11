@@ -1,0 +1,37 @@
+{% if categories %}
+<div class="main-subnav-wrapper" id="main-subnav-wrapper-1">
+  <div class="main-subnav">
+    <div class="main-subnav__left">
+      <ul class="nav flex-column">
+        {% for category in categories %}
+
+          {% if category.children %}
+          <li class="nav-item">
+            <a href="{{ category.href }}" class="nav-link">{{ category.name }} <span class="icon-down-arrow"></span></a>
+              <ul class="subnav">
+                
+                  {% for child in category.children %}
+                    <li class="subnav-item">
+                    <a href="{{ child.href }}" class="subnav-link">
+                      <div class="subnav-link__img">
+                        <img src="{{ child.image }}" alt="">
+                      </div>
+                      {{ child.name }}
+                    </a>
+                  </li>
+                  {% endfor %}
+               
+              </ul>
+          </li>
+          {% else %}
+            <li class="nav-item_no"><a class="nav-link_no" href="{{ category.href }}">{{ category.name }}</a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="main-subnav__right">
+      <ul class="subnav"></ul>
+    </div>
+  </div>
+</div>
+{% endif %}

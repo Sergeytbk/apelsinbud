@@ -1,0 +1,33 @@
+<file path="admin/view/template/design/layout_form.twig" error="skip">
+	<operation error="skip">
+        <search regex="true" position="replace"><![CDATA[~(.*?)[<]input(.*?)layout_module.*?[{].*?module_row.*?[}].*?position(.*?)[>]~]]></search>
+        <add position="replace"><![CDATA[
+<!-- Devices for Jet Cache -->
+<div class="input-group-btn" style="width: 131px;">
+	<select class="form-control" name="layout_module[{{ module_row }}][device]">
+		<option value="0" {% if layout_module.device == 0 %}selected="selected"{% endif %}>{{ text_replacer_device_all }}</option>
+		<option value="1" {% if layout_module.device == 1 %}selected="selected"{% endif %}>{{ text_replacer_device_comp }}</option>
+		<option value="2" {% if layout_module.device == 2 %}selected="selected"{% endif %}>{{ text_replacer_device_mob }}</option>
+		<option value="3" {% if layout_module.device == 3 %}selected="selected"{% endif %}>{{ text_replacer_device_smart }}</option>
+		<option value="4" {% if layout_module.device == 4 %}selected="selected"{% endif %}>{{ text_replacer_device_pad }}</option>
+	</select> 
+</div>
+$1<input$2layout_module[{{ module_row }}][position$3>
+    ]]></add>
+	</operation>
+	<operation error="skip">
+        <search regex="true" position="replace"><![CDATA[~(.*?)[<]input(.*?)layout_module.*?[+].*?module_row.*?[+].*?position(.*?)[;]~]]></search>
+        <add position="replace"><![CDATA[
+	html += '  <div class="input-group-btn" style="width: 131px;">';
+	html += '    <select class="form-control" name="layout_module[' + module_row + '][device]">';
+	html += '      <option value="0">{{ text_replacer_device_all }}</option>';
+	html += '      <option value="1">{{ text_replacer_device_comp }}</option>';
+	html += '      <option value="2">{{ text_replacer_device_mob }}</option>';
+	html += '      <option value="3">{{ text_replacer_device_smart }}</option>';
+	html += '      <option value="4">{{ text_replacer_device_pad }}</option>';
+	html += '    </select>'; 
+	html += '  </div>';  
+$1<input$2layout_module[' + module_row + '][position$3;
+    ]]></add>
+	</operation>
+</file>

@@ -1,0 +1,216 @@
+{{ header }}{{ column_left }}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="pull-right">
+                <button type="submit" form="form-module" data-toggle="tooltip" title="{{ button_save }}"
+                        class="btn btn-primary"><i class="fa fa-save"></i></button>
+                <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i
+                            class="fa fa-reply"></i></a></div>
+            <h1>{{ heading_title }}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid">
+        {% if error_warning %}
+            <div class="alert alert-danger alert-dismissible"><i
+                        class="fa fa-exclamation-circle"></i> {{ error_warning }}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+        {% endif %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+            </div>
+            <div class="panel-body">
+                <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-module"
+                      class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-name">Название типа (ENG key) / MIGX</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="name" value="{{ name }}" placeholder="Название типа (ENG key) / MIGX"
+                                   id="input-name" class="form-control"/>
+                            {% if error_name %}
+                                <div class="text-danger">{{ error_name }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-title">Подпись типа</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="title" value="{{ title }}" placeholder="Подпись типа"
+                                   id="input-title" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-title">Для MIGX?</label>
+                        <div class="col-sm-10">
+                            <select name="migx" class="cfHead form-control">
+                                <option value="0">Нет</option>
+                                <option value="1" {% if migx == 1 %}selected{% endif %}>Да</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 fields-header">Поля</div>
+
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <td>#</td>
+                            <td>Ключ (ENG)</td>
+                            <td>Подпись</td>
+                            <td>Тип</td>
+                            <td>Выводить в таблицу?</td>
+                            <td>Мультиязычное?</td>
+                            <td>Действия</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for field in fields %}
+                            <tr data-row="{{ loop.index }}">
+                                <td>{{ loop.index }}.</td>
+                                <td>
+                                    <input type="text" class="form-control cfName" name="cf[{{ loop.index }}][name]" value="{{ field.name }}" />
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control cfTitle" name="cf[{{ loop.index }}][title]" value="{{ field.title }}" />
+                                </td>
+                                <td>
+                                    <select name="cf[{{ loop.index }}][type]" class="form-control cfTyoe">
+                                        {% for key,typ in types %}
+                                            <option value="{{ key }}" {% if field.type == key %}selected{% endif %}>{{ typ }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="cf[{{ loop.index }}][head]" class="cfHead form-control">
+                                        <option value="0">Нет</option>
+                                        <option value="1" {% if field.head == 1 %}selected{% endif %}>Да</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="cf[{{ loop.index }}][lang]" class="cfHead form-control">
+                                        <option value="0">Нет</option>
+                                        <option value="1" {% if field.lang == 1 %}selected{% endif %}>Да</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-lg removeThisMigx">
+                                        <i class="fa fa-trash-o"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <button type="button" class="btn btn-info btn-lg addCfRow">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <style>
+        .d-none {
+            display: none;
+        }
+
+        .fields-header {
+            font-size: 24px;
+            text-align: center;
+        }
+    </style>
+
+    <script>
+
+
+        $('body').on('click', '.addCfRow', function (event) {
+
+
+            var row = parseInt($('#form-module').find('tbody tr:last').attr('data-row'));
+            console.log(row);
+            if(isNaN(row)){
+                row = 0;
+            }
+            row += 1;
+
+            var html = '<tr data-row='+row+'>';
+            html += '<td>'+(row)+'</td>';
+
+            html += '<td>';
+            html += '<input type="text" class="form-control cfName" name="cf['+row+'][name]" value="" />';
+            html += '</td>';
+
+            html += '<td>';
+            html += '<input type="text" class="form-control cfTitle" name="cf['+row+'][title]" value="" />';
+            html += '</td>';
+
+            html += '<td>';
+                html += '<select name="cf['+row+'][type]" class="form-control cfTyoe">';
+                    {% for key,typ in types %}
+                        html += '<option value="{{ key }}">{{ typ }}</option>';
+                    {% endfor %}
+                html += '</select>';
+            html += '</td>';
+
+            html += '<td>';
+                html += '<select name="cf['+row+'][head]" class="form-control cfTyoe">';
+                    html += '<option value="0">Нет</option>';
+                    html += '<option value="1">Да</option>';
+                html += '</select>';
+            html += '</td>';
+
+            html += '<td>';
+                html += '<select name="cf['+row+'][lang]" class="form-control cfLang">';
+                    html += '<option value="0">Нет</option>';
+                    html += '<option value="1">Да</option>';
+                html += '</select>';
+            html += '</td>';
+
+            html += '<td>';
+            html += '<button type="button" class="btn btn-danger btn-lg removeThisMigx">';
+            html += '<i class="fa fa-trash-o"></i>';
+            html += '</button>';
+            html += '</td>';
+            html += '</tr>';
+
+
+            $('#form-module').find('tbody').append(html);
+
+        });
+
+        $('body').on('click', '.removeThisMigx', function (event) {
+            $(this).closest('tr').remove();
+        });
+    </script>
+
+    <link href="view/javascript/codemirror/lib/codemirror.css" rel="stylesheet"/>
+    <link href="view/javascript/codemirror/theme/monokai.css" rel="stylesheet"/>
+    <script type="text/javascript" src="view/javascript/codemirror/lib/codemirror.js"></script>
+    <script type="text/javascript" src="view/javascript/codemirror/lib/xml.js"></script>
+    <script type="text/javascript" src="view/javascript/codemirror/lib/formatting.js"></script>
+
+    <script type="text/javascript" src="view/javascript/summernote/summernote.js"></script>
+    <link href="view/javascript/summernote/summernote.css" rel="stylesheet"/>
+    <script type="text/javascript" src="view/javascript/summernote/summernote-image-attributes.js"></script>
+    <script type="text/javascript" src="view/javascript/summernote/opencart.js"></script>
+    <script type="text/javascript"><!--
+        $('#language a:first').tab('show');
+        //--></script>
+</div>
+{{ footer }}

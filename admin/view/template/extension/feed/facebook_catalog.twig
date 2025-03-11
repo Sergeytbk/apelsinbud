@@ -1,0 +1,166 @@
+{{ header }}{{ column_left }} 
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-facebook-catalog" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %} 
+        <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+        {% endfor %} 
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if (error_warning) %} 
+    <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }} 
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %} 
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-facebook-catalog" class="form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+            <div class="col-sm-10">
+              <select name="facebook_catalog_status" id="input-status" class="form-control">
+                {% if (facebook_catalog_status) %} 
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+                {% else %} 
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %} 
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-file"><span data-toggle="tooltip" data-html="true" title="{{ help_file|escape }}">{{ entry_file }}</span></label>
+            <div class="col-sm-10">
+              <select name="facebook_catalog_file" id="input-file" class="form-control">
+                {% if (facebook_catalog_file) %} 
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+                {% else %} 
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %} 
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+			<label class="col-sm-2 control-label" for="input-data-feed"><span data-toggle="tooltip" data-html="true" title="{{ help_data_feed|escape }}">{{ entry_data_feed }}</span></label>
+            <div class="col-sm-10">
+              <textarea rows="5" id="input-data-feed" class="form-control" readonly>{{ data_feed }}</textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="facebook-catalog-availability">{{ entry_facebook_catalog_availability }}</label>
+            <div class="col-sm-10">
+              <select name="facebook_catalog_availability" id="facebook-catalog-availability" class="form-control">
+                {% if (facebook_catalog_availability == 1) %} 
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+				 <option value="2">{{ 'skip products' }}</option>
+				  {% elseif (facebook_catalog_availability == 2) %} 
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+				 <option value="2" selected="selected">{{ 'skip products' }}</option>
+                {% else %} 
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+				 <option value="2">{{ 'skip products' }}</option>
+                {% endif %} 
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="facebook-catalog-description">{{ entry_facebook_catalog_description }}</label>
+            <div class="col-sm-10">
+              <select name="facebook_catalog_description" id="facebook-catalog-description" class="form-control">
+                {% if (facebook_catalog_description) %} 
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+                {% else %} 
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %} 
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="facebook-catalog-description-html">{{ entry_facebook_catalog_description_html }}</label>
+            <div class="col-sm-10">
+              <select name="facebook_catalog_description_html" id="facebook-catalog-description-html" class="form-control">
+                {% if (facebook_catalog_description_html) %} 
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+                {% else %} 
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %} 
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="facebook-catalog-attribute-type"><span data-toggle="tooltip" data-html="true" title="{{ help_facebook_attribute_type|escape }}">{{ entry_facebook_attribute_type }}</span></label>
+            <div class="col-sm-10">
+              <select name="facebook_catalog_attribute_type" id="facebook-catalog-attribute-type" class="form-control">
+				{% for facebook_type in facebook_attributes_type %} 
+					{% if (facebook_catalog_attribute_type == facebook_type['attribute_id']) %} 
+						<option value="{{ facebook_type['attribute_id'] }}" selected="selected">{{ facebook_type['name'] }}</option>
+					{% else %} 
+						<option value="{{ facebook_type['attribute_id'] }}">{{ facebook_type['name'] }}</option>
+					{% endif %} 
+				{% endfor %} 
+              </select>
+            </div>
+          </div>
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="facebook-catalog-feed-id1"><span data-toggle="tooltip" data-html="true" title="{{ help_facebook_catalog_feed_id1|escape }}">{{ entry_facebook_catalog_feed_id1 }}</span></label>
+				<div class="col-sm-10">
+					<select name="facebook_catalog_feed_id1" id="facebook-catalog-feed-id1" class="form-control">
+                      {% if (facebook_catalog_feed_id1 == 'model') %} 
+						<option value="model" selected="selected">{{ 'model' }}</option>
+						<option value="product_id">{{ 'product_id' }}</option>
+                      {% else %} 
+						<option value="product_id" selected="selected">{{ 'product_id' }}</option>
+						<option value="model">{{ 'model' }}</option>
+                      {% endif %} 
+					</select>
+				</div>
+			</div>
+			
+		   <div class="form-group">
+			<label class="col-sm-2 control-label" for="facebook-catalog-use-taxes"><span data-toggle="tooltip" data-html="true" title="{{ help_facebook_catalog_use_taxes|escape }}">{{ entry_facebook_catalog_use_taxes }}</span></label>
+            <div class="col-sm-10">
+              <select name="facebook_catalog_use_taxes" id="facebook-catalog-use-taxes" class="form-control">
+                {% if (facebook_catalog_use_taxes == 1) %} 
+				<option value="0">{{ text_default }}</option>
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="2">{{ text_disabled }}</option>
+				  {% elseif (facebook_catalog_use_taxes == 2) %} 
+				 <option value="0">{{ text_default }}</option> 
+                <option value="1">{{ text_enabled }}</option>
+                <option value="2" selected="selected">{{ text_disabled }}</option>
+                {% else %} 
+				<option value="0" selected="selected">{{ text_default }}</option> 
+                <option value="1">{{ text_enabled }}</option>
+                <option value="2">{{ text_disabled }}</option>
+                {% endif %} 
+              </select>
+            </div>
+          </div>
+				
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{ footer }} 

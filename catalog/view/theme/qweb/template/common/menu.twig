@@ -1,0 +1,30 @@
+{% if categories %}
+
+
+<nav class="navbar navbar-expand-lg p-0" id="main-subnav-wrapper-1">
+  
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navs-menus navbar-nav w-100 justify-content-between">
+      {% for category in categories %}
+        {% if category.children %}
+          <li class="nav-item dropdown parent-li">
+            <a class="nav-link dropdown-toggle secondary-nav-link py-0" data-href="{{ category.href }}" href="{{ category.href }}" role="button" data-toggle="dropdown" aria-expanded="false">
+              <img src="{{ category.image }}" alt="" class="icon_menu"><span class="namcat-1">{{ category.name }}</span>
+            </a>
+            <div class="dropdown-menu dr-m ps ps--active-y">
+              {% for child in category.children %}
+              <a class="dropdown-item child-li" href="{{ child.href }}"><img src="{{ child.image }}" alt="" class="icon_menu_child">{{ child.name }}</a>
+              {% endfor %}
+            </div>
+          </li>
+        {% else %}
+          <li class="nav-item no_parent_li">
+            <a class="nav-link secondary-nav-link py-0" href="{{ category.href }}"><img src="{{ category.image }}"  class="icon_menu" alt=""><span class="namcat-1">{{ category.name }}</span></a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</nav>
+
+{% endif %} 

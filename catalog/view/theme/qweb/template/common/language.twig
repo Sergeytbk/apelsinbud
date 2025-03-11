@@ -1,0 +1,14 @@
+{% if languages|length > 1 %}
+<div class="footer-lang">
+  {% for language in languages %}
+    {% if loop.index > 1 %}
+      | 
+    {% endif %}
+    {% if language.code == code %}
+      <span class="footer-lang__active">{{ language.name }}</span>
+    {% else %}
+      <a href="{{ language.url }}" data-code="{{ language.code }}" class="footer-lang__link">{{ language.name }}</a>
+    {% endif %}
+  {% endfor %}
+</div>
+{% endif %}

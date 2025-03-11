@@ -1,0 +1,19 @@
+{% if categories %}
+<a href="#" class="btn btn_yellow btn-aside js-btn-aside-catalog d-lg-none">{{ text_category_left_module }} <span class="icon-down-arrow"></span></a>
+<ul class="aside-nav d-lg-block">
+  {% for category in categories %}
+    <li class="aside-nav-item">
+      <a href="{{ category.href }}" class="aside-nav-item__link {% if category.category_id == category_id %} active{% endif %}" {% if not category.children %}data-go="1"{% endif %}>{{ category.name }} {% if category.children %}<span class="icon-down-arrow">{% endif %}</span></a>
+      {% if category.children %}
+      <ul class="aside-subnav" {% if category.category_id == category_id %}style="display: block"{% endif %}>
+        {% for child in category.children %}
+          <li class="aside-subnav-item {% if child_id == child.category_id %} active{% endif %}">
+            <a href="{{ child.href }}" class="aside-subnav-link">{{ child.name }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
+{% endif %}

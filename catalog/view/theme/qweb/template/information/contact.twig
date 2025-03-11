@@ -1,0 +1,71 @@
+{{ header }}
+
+<section class="section section_bottom">
+  <div class="section-border section-border-bottom">
+    <div class="container container-fluid">
+
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          {% for breadcrumb in breadcrumbs %}
+            {% if loop.last %}
+              <li class="breadcrumb-item active" aria-current="page">{{ breadcrumb.text }}</li>
+            {% else %}
+              <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endif %}
+          {% endfor %}
+        </ol>
+      </nav>
+
+      <div class="title-box">
+        <h1 class="title">{{ heading_title }}</h1>
+      </div>
+
+      <div class="section-contact">
+        <div class="row align-items-center">
+          <div class="col-12 col-md-5 col-lg-4">
+            {{ content_top }}
+            {#
+            <div class="contacts">
+              <div class="contacts__title">{{ text_contact_page_tels }}</div>
+              <div class="contacts__value">
+                <span class="contacts__icon icon-call"></span>
+                <a href="tel:{{ config_kyivstar |replace({'-':"",'+':"",'(':"",')':"",' ':"","+38":""}) }}">{{ config_kyivstar }}</a><br>
+                <a href="tel:{{ config_life |replace({'-':"",'+':"",'(':"",')':"",' ':"","+38":""}) }}">{{ config_life }}</a><br>
+                <a href="tel:{{ config_vodafone |replace({'-':"",'+':"",'(':"",')':"",' ':"","+38":""}) }}">{{ config_vodafone }}</a><br>
+              </div>
+            </div>
+            <div class="contacts">
+              <div class="contacts__title">{{ text_contact_page_mail }}</div>
+              <div class="contacts__value">
+                <span class="contacts__icon icon-mail"></span>
+                <a href="mailto:{{ config_email }}">{{ config_email }}</a>
+              </div>
+            </div>
+            <div class="contacts">
+              <div class="contacts__title">{{ text_contact_page_address }}</div>
+              <div class="contacts__value">
+                <span class="contacts__icon icon-maps-and-flags"></span>
+                {{ config_address }}
+              </div>
+            </div>
+            <div class="contacts">
+              <div class="contacts__title">{{ text_contact_page_open }}</div>
+              <div class="contacts__value">
+                <span class="contacts__icon icon-calendar"></span>
+                {{ config_open }}
+              </div>
+            </div>
+            #}
+          </div>
+          <div class="col-12 col-md-7 col-lg-8">
+            {#<div class="map" id="map"></div>#}
+            {{ content_bottom }}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{{ footer }}

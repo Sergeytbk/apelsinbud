@@ -1,0 +1,16 @@
+<file path="system/engine/loader.php" error="skip">
+	<operation error="skip">
+        <search regex="true" position="replace"><![CDATA[~(.*?)function view[(](.*?)\{~]]></search>
+        <add position="replace"><![CDATA[
+$1function view($2{
+		// Data for Jet Cache
+		if (!defined('DIR_CATALOG')) {
+			if (!is_array($this->registry->get('jc_data_view'))) {
+				$this->registry->set('jc_data_view', array());	
+			}
+			$this->registry->set('jc_data_view', array_merge($this->registry->get('jc_data_view'), $data));
+		}	
+    ]]></add>
+	</operation>
+
+</file>

@@ -14,8 +14,22 @@ class ThinkClientReplace extends ThinkClientHtmlMethods
 		$this->html = str_replace("</head>", "<!-- comment -->\n</head>", $this->html);
 
 		$this->addThinkText();
+		$this->fixCanonical();
 
 		return $this->html;
+	}
+
+	public function fixCanonical()
+	{			
+		if(($this->detector->isCategory || $this->detector->isIndexFilters) && !$this->detector->isPagination  && !$this->detector->isSort){
+            $this->setRobots('index,follow');
+            $this->setCanonical('https:'.$this->url);
+        }
+
+        //noindex filters robots
+        if($this->detector->isNoIndexFilters){
+            $this->setRobots('noindex,nofollow');
+        }		
 	}
 
 	public function addThinkText()

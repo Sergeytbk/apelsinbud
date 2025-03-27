@@ -87,11 +87,26 @@ class ThinkClientPageDetector extends ThinkClient{
 	{
     	if(!empty($GLOBALS['THINK_ACTIVE_FILTERS'])){
     		$this->active_filters = $GLOBALS['THINK_ACTIVE_FILTERS'];
-    	}elseif(preg_match_all('/<!--active_filter:(.*?):(.*?)-->/', $this->html, $find_filters)){
+    	/*}elseif(preg_match_all('/<!--active_filter:(.*?):(.*?)-->/', $this->html, $find_filters)){
     		foreach ($find_filters[1] as $key => $name) {
     			$this->active_filters[] = array('name' => $name, 'value' => $find_filters[2][$key]);
     		}
-    	}
+    	}*/
+    	}elseif($this->isCategory) {
+			preg_match_all('#<div class="filter-item" id=".*?">.*?<div class="filter-item__title[^>]*">(?<title>.*?)<span.*?</span>.*?<ul class="filter-list">(?<options>.*?)</ul>#s', $this->html, $matches);
+			if(!empty($matches['options'])) {
+				foreach ($matches['options'] as $key => $options) {
+					preg_match_all('#<li>.*?<label[^>]*class="ocf-selected"[^>]*>.*?<label[^>]*>(?<option_name>.*?)</label>#s', $options, $options_match);
+					if(!empty($options_match['option_name'])) {
+						foreach ($options_match['option_name'] as $option) {
+							$this->active_filters[] = array('name' => rtrim(trim($matches['title'][$key]), ':'), 'value' => $option);
+						}
+					}
+					
+				}
+			}
+			
+		}
     }
 
     public function detectIndexFilters()

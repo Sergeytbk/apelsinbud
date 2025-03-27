@@ -15,9 +15,78 @@ class ThinkClientReplace extends ThinkClientHtmlMethods
 
 		$this->addThinkText();
 		$this->fixCanonical();
+		$this->addSemant();
 
 		return $this->html;
 	}
+
+	private function addSemant() {
+        $url = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+        if (preg_match('#<ol class="breadcrumb">(.*?)</ol>#s', $this->html, $findBreadcrumb)) {        	
+            if (preg_match_all('#<li class="breadcrumb-item[^>]*>.*?(<a href="(?<href>.*?)">)?(?<name>.*?)(</a>)?</li>#s', $findBreadcrumb[1], $findBreadcrumbItems)) {
+            	if(!empty($findBreadcrumbItems['name'])) {
+            		$semantBreadcrumb = '
+            		<script type="application/ld+json">
+            		{
+					  "@context": "https://schema.org",
+					  "@type": "BreadcrumbList",
+					  "itemListElement": [';
+                  	$pos = 1;
+	                for($i = 0; $i < count($findBreadcrumbItems['name']); $i++) {
+	                    $name = str_replace('"','', $findBreadcrumbItems['name'][$i]);
+	                    $href = $findBreadcrumbItems['href'][$i] != '' ? $findBreadcrumbItems['href'][$i] : $url;
+	                    $semantBreadcrumb .= '
+                     	{
+					      "@type": "ListItem",
+					      "position": '.$pos.',
+					      "name": "'.$name.'",
+					      "item": "'.$href.'"
+					    }';
+					    if($pos < count($findBreadcrumbItems['name'])) $semantBreadcrumb .= ',';
+	                    $pos++;
+	                }
+					$semantBreadcrumb .= '
+					  ]
+					}
+	 				</script>
+					';
+	                $this->html=str_replace("</head>", $semantBreadcrumb."</head>", $this->html);
+	    		}
+        	}
+    	}
+
+    	if($this->detector->isProduct) {
+    		
+			$avail = strpos($this->html, '<div class="products-item__avail mb-3">') !== false ? "https://schema.org/InStock" : "https://schema.org/OutOfStock";
+			$img = preg_match('#<a[^>]*href="([^>]*)"[^>]*class="product-images-main"[^>]*>#s', $this->html, $match_img) ? $match_img[1] : '';
+			$price = preg_match('#<div class="product__price_new">(.*?)<span>.*?</div>#s', $this->html, $match_price) ? trim(str_replace('грн', '', $match_price[1])) : '';
+
+    		$semantProduct = '
+    		<script type="application/ld+json">
+    		{
+			  "@context": "http://schema.org/",
+			  "@type": "Product",
+			  "name": "'.$this->h1.'",
+			  "image": [
+			    "'.$img.'"
+			  ],
+			  "offers": {
+			    "@type": "Offer",
+			    "priceValidUntil": "'.date('Y-m-d').'",
+			    "url": "https:'.$this->url.'",
+			    "priceCurrency": "UAH",
+			    "price": "'.$price.'",
+			    "availability": "'.$avail.'",
+			    "seller": {
+			      "@type": "Organization",
+			      "name": "Апельсин Буд"
+			    }
+			  }
+			}
+		  	</script>';
+		  	$this->html=str_replace("</head>", $semantProduct."</head>", $this->html);
+    	}
+    }
 
 	public function fixCanonical()
 	{			
@@ -62,10 +131,6 @@ class ThinkClientReplace extends ThinkClientHtmlMethods
 		}*/
 
 		$style      = '<style>h1.think{margin-bottom: 20px; margin-top: -20px; text-align: center;} .think:has(think_text:empty){display: none;} .think.category{margin-top: 40px; font-size: 16px; color: #666;}</style>';
-		$this->html = str_replace("</head>", $style . "</head>", $this->html);
-		if($_SERVER['REMOTE_ADDR'] == '46.174.126.145') {
-			unset($this->detector->html);
-			$this->html = str_replace("</footer>", "</footer><pre style='color:#fff'>".var_export($this->detector,1)."</pre>", $this->html);
-		}	
+		$this->html = str_replace("</head>", $style . "</head>", $this->html);	
 	}
 }

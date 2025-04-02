@@ -69,7 +69,7 @@ class ThinkClientPageDetector extends ThinkClient{
 
     public function parseBreadcrumbs()
     {
-    	if(preg_match('/<div class="breadcrumb"(.*?)>(.*?)<\/div>/s', $this->html, $find_bs_block)){
+    	if(preg_match('/<ol class="breadcrumb"(.*?)>(.*?)<\/ol>/s', $this->html, $find_bs_block)){
     		$this->bs_html = $find_bs_block[0];
     		$this->getParentCategory();
         }

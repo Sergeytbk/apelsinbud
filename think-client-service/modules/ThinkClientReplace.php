@@ -98,6 +98,10 @@ class ThinkClientReplace extends ThinkClientHtmlMethods
         //noindex filters robots
         if($this->detector->isNoIndexFilters){
             $this->setRobots('noindex,nofollow');
+            $this->setCanonical($this->detector->parent_category['link']);
+        }
+        if(strpos($this->html, '<div class="products-item">') === false) {
+        	$this->setRobots('noindex,nofollow');
         }		
 	}
 

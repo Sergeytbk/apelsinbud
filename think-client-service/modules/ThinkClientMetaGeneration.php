@@ -16,13 +16,15 @@ class ThinkClientMetaGeneration extends ThinkClientHtmlMethods
 
 	public function replace_html()
 	{
+		if (strpos($this->uri, '/ua/') !== false) return $this->html;		
+
 		if (empty($this->detector) || empty($this->formulas_conf) || empty($this->detector->parent_category))
 			return $this->html;
 
 		//mod
-		if(!empty($this->detector->active_filters) && !empty($this->detector->parent_category) ){
-			$this->replace_h1($this->detector->parent_category['name']);
-		}
+		// if(!empty($this->detector->active_filters) && !empty($this->detector->parent_category) ){
+		// 	$this->replace_h1($this->detector->parent_category['name']);
+		// }
 		//mod
 
 		foreach (array_keys($this->detector->page_types) as $page_type) {
@@ -41,6 +43,7 @@ class ThinkClientMetaGeneration extends ThinkClientHtmlMethods
 
 		$formula_data['h1'] = $this->h1;
 		$formula_data['parent_category_name'] = $this->detector->parent_category['name'];
+		$formula_data['parent_category_name_small'] = mb_strtolower($this->detector->parent_category['name']);
 
 		if(!empty($this->detector->page_number))
 			$formula_data['page_number'] = $this->detector->page_number;
@@ -56,7 +59,9 @@ class ThinkClientMetaGeneration extends ThinkClientHtmlMethods
 					$formula_data[$active_filter['name'].'_value'] = $active_filter['value'];
 				}else{
 					$formula_data['filter_name_'.$i] = $active_filter['name'];
+					$formula_data['filter_name_small_'.$i] = mb_strtolower($active_filter['name']);
 					$formula_data['filter_value_'.$i] = $active_filter['value'];
+					$formula_data['filter_value_small_'.$i] = mb_strtolower($active_filter['value']);
 					$i++;
 				}
 			}

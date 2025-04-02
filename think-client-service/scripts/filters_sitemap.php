@@ -19,7 +19,7 @@ $url_number = 0;
 for ($i = 1; $i <= $sitemap_filters_files_count ; $i++) { 
     $indexes_contents .= '
         <sitemap>
-            <loc>https://'.$_SERVER['SERVER_NAME'].'/think-client-service/data/sitemap_filters_xml/'.$_SERVER['SERVER_NAME'].'-sitemap-filters-'.$i.'.xml</loc>
+            <loc>https://'.$_SERVER['SERVER_NAME'].'/think-client-service/data/sitemap_filters_xml/sitemap-filters-'.$i.'.xml</loc>
         </sitemap>
     ';
     $sitemap_content = '<?xml version="1.0" encoding="UTF-8"?>
@@ -39,7 +39,7 @@ for ($i = 1; $i <= $sitemap_filters_files_count ; $i++) {
     }
     $sitemap_content .= '</urlset>';
     
-    file_put_contents(THINK_CLIENT_DATA_PATH.'/sitemap_filters_xml/'.$_SERVER['SERVER_NAME'].'-sitemap-filters-'.$i.'.xml', $sitemap_content);
+    file_put_contents(THINK_CLIENT_DATA_PATH.'/sitemap_filters_xml/sitemap-filters-'.$i.'.xml', $sitemap_content);
 }
 $indexes_contents .= '
     </sitemapindex>
